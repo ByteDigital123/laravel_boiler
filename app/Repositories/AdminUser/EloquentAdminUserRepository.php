@@ -35,8 +35,8 @@ class EloquentAdminUserRepository extends BaseRepository implements AdminUserInt
                 'first_name' => $attributes['first_name'],
                 'last_name' => $attributes['last_name'],
                 'email' => $attributes['email'],
-                'password' => 'abc123',
-                'role' => $attribures['role'],
+                'password' => bcrypt('abc123'),
+                'role' => $attributes['role'],
                 'api_token' => Str::random(60),
             ]);
 
@@ -67,8 +67,6 @@ class EloquentAdminUserRepository extends BaseRepository implements AdminUserInt
               $user->password = Hash::make($attributes['password']);
               $user->save();
           }
-
-
 
         } catch(Exception $e){
             return response()->error($e->message);

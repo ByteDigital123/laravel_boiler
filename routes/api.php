@@ -36,6 +36,15 @@ Route::group(['middleware' => 'auth:admin_api'], function(){
 	Route::put('roles/{role}', 'Api\RoleController@update');
 
 
+
+  // SANDBOX - DEV ONLY
+	Route::get('sandbox', 'Api\SandboxController@index');
+	Route::get('sandbox/{sandbox}', 'Api\SandboxController@show');
+	Route::post('sandbox', 'Api\SandboxController@store');
+	Route::delete('sandbox', 'Api\SandboxController@destroy');
+	Route::put('sandbox/{sandbox}', 'Api\SandboxController@update');
+
+
   // FILE UPLOAD
   Route::post('file-upload/image', 'FileController@store');
 

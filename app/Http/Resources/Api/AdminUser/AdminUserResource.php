@@ -22,7 +22,7 @@ class AdminUserResource extends JsonResource
            'last_name' => $this->last_name,
            'role' => $this->getRoleNames(),
            'isSuperAdmin' => $this->isSuperAdmin($this->id),
-           'permissions' => $this->hasRole('Super Admin') ? ['ALL'] : $this->getPermissionsViaRoles()->pluck('name')
+           'permissions' => $this->getPermissionsViaRoles()->pluck('name')
        ];
     }
 }

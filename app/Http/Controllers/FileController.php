@@ -28,10 +28,8 @@ class FileController extends Controller
     {
         $attributes = $request->all();
 
-        $media = MediaUploader::fromSource($attributes['file'])->upload();
-
-        $file_import = new ImageFileService($attributes['file'], Str::random(6), 'public');
-        return $file_import->save();
+        $fileService = new ImageFileService($attributes['file']);
+        return $fileService->handle();
 
     }
 
