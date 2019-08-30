@@ -2,27 +2,27 @@
 
 namespace App\Services;
 
-use Carbon\Carbon;
-use Intervention\Image\Facades\Image;
-use Illuminate\Support\Facades\Storage;
 use MediaUploader;
+use App\Services\Image\ImageService;
 use App\Http\Resources\Api\File\FileResource;
 
 class ImageFileService
 {
+    protected $imageService;
 
-
-    public function __construct($file)
+    public function __construct(ImageService $imageService)
     {
-        $this->file = $file;
+        $this->imageService = $imageService;
     }
 
-    public function handle()
+    public function handle($file)
     {
-      $media = MediaUploader::fromSource($this->file)->toDirectory('nucleus')->onDuplicateIncrement()->upload();
-      $originalFile = $this->file;
-      $return = new FileResource($media);
-      return response()->json($return);
-    }
+        $compressed_file = $this->imageService->handle($file);
 
+        $media = MediaUploader::fromSource($compressed_file)->toDirectory('nucleus')->onDuplicateIncrement()->upload();
+
+        $return = new FileResource($media);
+
+        return response()->json($return);
+    }
 }

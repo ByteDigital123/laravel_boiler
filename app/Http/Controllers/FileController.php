@@ -1,13 +1,19 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Str;
+
 use Illuminate\Http\Request;
 use App\Services\ImageFileService;
-use MediaUploader;
 
 class FileController extends Controller
 {
+    protected $fileService;
+
+    public function __construct(ImageFileService $fileService)
+    {
+        $this->fileService = $fileService;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +21,6 @@ class FileController extends Controller
      */
     public function index()
     {
-        //
     }
 
     /**
@@ -28,9 +33,8 @@ class FileController extends Controller
     {
         $attributes = $request->all();
 
-        $fileService = new ImageFileService($attributes['file']);
+        $this->fileService->handle($attributes['file']);
         return $fileService->handle();
-
     }
 
     /**

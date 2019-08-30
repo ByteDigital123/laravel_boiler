@@ -1,13 +1,10 @@
 <?php
 
 namespace App\Http\Controllers\Api;
+
 use App\Http\Controllers\Controller;
 use App\Sandbox;
 use Illuminate\Http\Request;
-use App\Services\ImageFileService;
-use App\Services\ImageFileAttachService;
-use MediaUploader;
-use Illuminate\Support\Collection;
 
 class SandboxController extends Controller
 {
@@ -45,10 +42,9 @@ class SandboxController extends Controller
         $attributes = $request->all();
         $entry = Sandbox::create($attributes);
 
-        $images = collect($attributes['images']);
-        $fileService = new ImageFileAttachService($attributes['images'], $entry, 'testingtag');
+        $entry->attachFiles($attributes['images'], 'testingtag');
 
-        return $fileService->handle();
+        return response()->success('Model saved');
     }
 
     /**
