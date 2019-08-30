@@ -19,7 +19,8 @@ class ImageFileService
 
     public function handle()
     {
-      $media = MediaUploader::fromSource($this->file)->onDuplicateUpdate()->upload();
+      $media = MediaUploader::fromSource($this->file)->toDirectory('nucleus')->onDuplicateIncrement()->upload();
+      $originalFile = $this->file;
       $return = new FileResource($media);
       return response()->json($return);
     }

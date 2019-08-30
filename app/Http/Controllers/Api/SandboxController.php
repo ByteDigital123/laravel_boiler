@@ -5,11 +5,14 @@ use App\Http\Controllers\Controller;
 use App\Sandbox;
 use Illuminate\Http\Request;
 use App\Services\ImageFileService;
+use App\Services\ImageFileAttachService;
 use MediaUploader;
 use Illuminate\Support\Collection;
 
 class SandboxController extends Controller
 {
+
+
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +20,8 @@ class SandboxController extends Controller
      */
     public function index()
     {
-        //
+        $sandbox = Sandbox::find();
+        return $sandbox;
     }
 
     /**
@@ -42,8 +46,9 @@ class SandboxController extends Controller
         $entry = Sandbox::create($attributes);
 
         $images = collect($attributes['images']);
+        $fileService = new ImageFileAttachService($attributes['images'], $entry, 'testingtag');
 
-        $entry->attachMedia($images, 'examples');
+        return $fileService->handle();
     }
 
     /**
