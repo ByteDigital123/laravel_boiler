@@ -33,8 +33,7 @@ class FileController extends Controller
     {
         $attributes = $request->all();
 
-        $this->fileService->handle($attributes['file']);
-        return $fileService->handle();
+        return $this->fileService->handle($attributes['file']);
     }
 
     /**
