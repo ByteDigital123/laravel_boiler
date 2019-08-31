@@ -12,26 +12,26 @@ use Reliese\Database\Eloquent\Model;
 
 /**
  * Class PermissionGroup
- * 
+ *
  * @property int $id
  * @property string $name
  * @property Carbon $created_at
  * @property Carbon $updated_at
- * 
+ *
  * @property Collection|Permission[] $permissions
  *
  * @package App
  */
 class PermissionGroup extends Model
 {
-	protected $table = 'permission_groups';
+    protected $table = 'permission_groups';
 
-	protected $fillable = [
-		'name'
-	];
+    protected $fillable = [
+        'name'
+    ];
 
-	public function permissions()
-	{
-		return $this->hasMany(Permission::class);
-	}
+    public function permissions()
+    {
+        return $this->hasMany(Permission::class);
+    }
 }

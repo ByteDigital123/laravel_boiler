@@ -5,9 +5,7 @@ namespace App;
 use Laravel\Passport\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
-use App\Http\Resources\Permission\PermissionResource;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-
 
 class AdminUser extends Authenticatable
 {
@@ -50,7 +48,8 @@ class AdminUser extends Authenticatable
     ];
 
 
-    public function AauthAcessToken(){
+    public function AauthAcessToken()
+    {
         return $this->hasMany('\App\OauthAccessToken');
     }
 
@@ -74,13 +73,12 @@ class AdminUser extends Authenticatable
      * @param  [type]  $value [description]
      * @return boolean        [description]
      */
-    public function isSuperAdmin($value){
-       if($value === 1){
+    public function isSuperAdmin($value)
+    {
+        if ($value === 1) {
             return true;
-       }else{
-         return false;
-       }
+        } else {
+            return false;
+        }
     }
-
-
 }
