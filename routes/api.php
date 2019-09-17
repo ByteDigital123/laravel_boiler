@@ -35,7 +35,12 @@ Route::group(['middleware' => 'auth:admin_api'], function(){
 	Route::delete('roles', 'Api\RoleController@destroy');
 	Route::put('roles/{role}', 'Api\RoleController@update');
 
-
+	// PAGES
+	Route::get('pages', 'Api\PageController@index');
+	Route::get('pages/{page}', 'Api\PageController@show');
+	Route::post('pages', 'Api\PageController@store');
+	Route::delete('pages', 'Api\PageController@destroy');
+	Route::put('pages/{page}', 'Api\PageController@update');
 
   // SANDBOX - DEV ONLY
 	Route::get('sandbox', 'Api\SandboxController@index');
