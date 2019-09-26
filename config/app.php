@@ -174,6 +174,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+      
 
         /*
          * Repositories
@@ -182,6 +183,7 @@ return [
         App\Repositories\Permission\PermissionRepoServiceProvider::class,
         App\Repositories\Role\RoleRepoServiceProvider::class,
         App\Repositories\PermissionGroup\PermissionGroupRepoServiceProvider::class,
+        App\Repositories\Page\PageRepoServiceProvider::class,
 
         /*
          * Macros
