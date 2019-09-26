@@ -8,6 +8,6 @@ class Email implements Filter
 {
     public static function apply($builder, $value)
     {
-        return $builder->where('email', $value);
+        return $builder->where('email', 'like', '%' . $value . '%');
     }
 }
