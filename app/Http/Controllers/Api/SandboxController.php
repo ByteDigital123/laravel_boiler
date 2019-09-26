@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
 use App\Sandbox;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\SandboxResource;
 
 class SandboxController extends Controller
 {
@@ -17,8 +18,7 @@ class SandboxController extends Controller
      */
     public function index()
     {
-        $sandbox = Sandbox::find();
-        return $sandbox;
+        return SandboxResource::collection(Sandbox::paginate(12));
     }
 
     /**
