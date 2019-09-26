@@ -6,6 +6,8 @@ use App\Sandbox;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\SandboxResource;
+use App\SearchFilters\Sandbox\SandboxSearch;
+use App\Http\Requests\Api\Sandbox\SandboxRequest;
 
 class SandboxController extends Controller
 {
@@ -16,9 +18,9 @@ class SandboxController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(SandboxRequest $request)
     {
-        return SandboxResource::collection(Sandbox::paginate(12));
+        return SandboxResource::collection(SandboxSearch::apply($request)->paginate($request['pagination']));
     }
 
     /**
