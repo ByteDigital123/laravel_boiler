@@ -20,6 +20,7 @@ trait SearchableTrait
             if ($value) {
                 $decorator = static::createFilterDecorator($filterName);
 
+
                 if (static::isValidDecorator($decorator)) {
                     $query = $decorator::apply($query, $value);
                 }
@@ -31,7 +32,7 @@ trait SearchableTrait
     
     private static function createFilterDecorator($name)
     {
-        return __NAMESPACE__ . '\\Filters\\' .
+        return self::$namespace . '\\Filters\\' .
             str_replace(' ', '', ucwords(str_replace('_', ' ', $name)));
     }
     

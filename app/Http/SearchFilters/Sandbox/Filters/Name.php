@@ -8,6 +8,6 @@ class Name implements Filter
 {
     public static function apply($builder, $value)
     {
-        return $builder->where('name', $value);
+        return $builder->where('name', 'like', '%' . $value . '%');
     }
 }
