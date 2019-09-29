@@ -1,6 +1,6 @@
 <?php
 
-namespace App\SearchFilters\Sandbox;
+namespace App\SearchFilters;
 
 use Illuminate\Database\Eloquent\Builder;
 

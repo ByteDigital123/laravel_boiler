@@ -33,7 +33,7 @@ trait SearchableTrait
     private static function createFilterDecorator($name)
     {
         return self::$namespace . '\\Filters\\' .
-            str_replace(' ', '', ucwords(str_replace('_', ' ', $name)));
+            str_replace(' ', '', mb_convert_case($name, MB_CASE_TITLE, "UTF-8"));
     }
     
     private static function isValidDecorator($decorator)
