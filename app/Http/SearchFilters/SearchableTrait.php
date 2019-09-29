@@ -20,7 +20,6 @@ trait SearchableTrait
             if ($value) {
                 $decorator = static::createFilterDecorator($filterName);
 
-
                 if (static::isValidDecorator($decorator)) {
                     $query = $decorator::apply($query, $value);
                 }
