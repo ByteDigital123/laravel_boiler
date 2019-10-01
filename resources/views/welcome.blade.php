@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel PARFETTS</title>
+        <title>Nucleus Backend</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -18,10 +18,17 @@
                 font-weight: 200;
                 height: 100vh;
                 margin: 0;
+                  
+
             }
 
             .full-height {
                 height: 100vh;
+                  /* background-image: url("/images/photo.jpg"); */
+                  /* Center and scale the image nicely */
+                  background-position: center;
+                  background-repeat: no-repeat;
+                  background-size: cover;
             }
 
             .flex-center {
@@ -45,7 +52,9 @@
             }
 
             .title {
-                font-size: 84px;
+                font-size: 120px;
+                color: #FFFFFF;
+text-shadow: 1px 3px 0 #969696, 1px 13px 5px #aba8a8;
             }
 
             .links > a {
@@ -61,37 +70,15 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+
+
         </style>
     </head>
     <body>
         <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
-
-            <div class="content">
+             <div class="content">
                 <div class="title m-b-md">
-                    Laravel Parfetts
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    Nucleus API
                 </div>
             </div>
         </div>

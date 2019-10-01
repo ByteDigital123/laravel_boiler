@@ -11,5 +11,5 @@
 |
 */
 Route::get('/', function () {
-    return 'This is the homepage';
+    return view('welcome');
 });
