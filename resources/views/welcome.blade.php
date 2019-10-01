@@ -52,9 +52,19 @@
             }
 
             .title {
-                font-size: 120px;
+               
+            }
+
+            .subtitle {
+                font-size: 44px;
                 color: #FFFFFF;
-                text-shadow: 0px 0px 0 #969696, 7px 13px 10px #aba8a8;
+                text-shadow: 0px 0px 0 #969696, 3px 5px 2px #aba8a8;
+            }
+
+            .title {
+                 font-size: 120px;
+                color: #FFFFFF;
+                text-shadow: 0px 0px 0 #969696, 7px 13px 8px #aba8a8;
             }
 
             .links > a {
@@ -79,6 +89,9 @@
              <div class="content">
                 <div class="title m-b-md">
                     Nucleus API
+                </div>
+                <div class="subtitle">
+                    All is foine
                 </div>
             </div>
         </div>

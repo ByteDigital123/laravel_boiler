@@ -11,4 +11,3 @@ tooling:
     service: appserver
     description: "Run PHP Unit tests: lando phpunit"
     cmd: /app/vendor/bin/phpunit
-
