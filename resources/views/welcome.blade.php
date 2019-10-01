@@ -54,7 +54,7 @@
             .title {
                 font-size: 120px;
                 color: #FFFFFF;
-text-shadow: 1px 3px 0 #969696, 1px 13px 5px #aba8a8;
+                text-shadow: 0px 0px 0 #969696, 7px 13px 10px #aba8a8;
             }
 
             .links > a {
