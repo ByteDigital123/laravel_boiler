@@ -21,7 +21,7 @@ trait ApiSearchableTrait
 
         $query->orderBy($request->sort ? $request->sort : 'created_at', $request->order ? $request->order : 'asc');
 
-
+        //dd(\App\Helpers\Helpers::returnSqlWithBindings($query));
         return $query;
     }
 
@@ -46,7 +46,7 @@ trait ApiSearchableTrait
                 if ($value) {
                     $decorator = static::createFilterDecorator($filterName);
                     if (static::isValidDecorator($decorator)) {
-                        $query = $decorator::apply($query, $filterName, $value);
+                        $query = $decorator::apply($query, $value);
                     }
                 }
             }
