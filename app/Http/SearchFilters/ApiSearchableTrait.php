@@ -18,10 +18,10 @@ trait ApiSearchableTrait
     {
         if ($value = $request->search) {
             foreach ((new self::$model)->getSearchable() as $filterName) {
-                $decorator = static::createFilterDecorator($filterName);
+                $decorator = static::createFilterDecorator();
 
                 if (static::isValidDecorator($decorator)) {
-                    $query = $decorator::apply($query, $value);
+                    $query = $decorator::apply($query, $filterName, $value);
                 }
             }
         }
@@ -29,10 +29,9 @@ trait ApiSearchableTrait
         return $query;
     }
     
-    private static function createFilterDecorator($name)
+    private static function createFilterDecorator()
     {
-        return self::$namespace . '\\Filters\\' .
-            str_replace(' ', '', mb_convert_case($name, MB_CASE_TITLE, "UTF-8"));
+        return self::$namespace . '\\Filters\\FilterClass';
     }
     
     private static function isValidDecorator($decorator)
