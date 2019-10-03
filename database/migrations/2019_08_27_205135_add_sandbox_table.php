@@ -30,6 +30,6 @@ class AddSandboxTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('sandbox');
     }
 }

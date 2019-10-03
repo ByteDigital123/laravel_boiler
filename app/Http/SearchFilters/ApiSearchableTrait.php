@@ -11,13 +11,16 @@ trait ApiSearchableTrait
     {
         $query = static::applyDecoratorsFromRequest($filters, (new self::$model)->newQuery());
 
-        return $query;
+        return $query->paginate($filters->paginate);
     }
     
     private static function applyDecoratorsFromRequest(Request $request, Builder $query)
     {
         $query = static::applySearchDecorators($request, $query);
         $query = static::applyFilterDecorators($request, $query);
+
+        $query->orderBy($request->sort ? $request->sort : 'created_at', $request->order ? $request->order : 'asc');
+
 
         return $query;
     }
@@ -26,10 +29,9 @@ trait ApiSearchableTrait
     {
         if ($value = $request->search) {
             foreach ((new self::$model)->searchable as $filterName) {
-                $decorator = static::createFilterDecorator();
-
+                $decorator = static::createSearchDecorator();
                 if (static::isValidDecorator($decorator)) {
-                    $query = $decorator::apply($query, $filterName, $value);
+                    $query = $decorator::apply($query, $filterName, $request->search);
                 }
             }
         }
@@ -43,7 +45,6 @@ trait ApiSearchableTrait
             foreach ($request->filters as $filterName => $value) {
                 if ($value) {
                     $decorator = static::createFilterDecorator($filterName);
-
                     if (static::isValidDecorator($decorator)) {
                         $query = $decorator::apply($query, $filterName, $value);
                     }
@@ -55,9 +56,9 @@ trait ApiSearchableTrait
     }
 
 
-    public static function createSearchDecorator($name)
+    public static function createSearchDecorator()
     {
-        return self::$namespace . SearchClass::class;
+        return SearchClass::class;
     }
     
     private static function createFilterDecorator($name)

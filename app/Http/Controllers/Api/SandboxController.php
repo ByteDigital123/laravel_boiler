@@ -20,7 +20,7 @@ class SandboxController extends Controller
      */
     public function index(SandboxRequest $request)
     {
-        return SandboxResource::collection(SandboxSearch::apply($request)->paginate($request['pagination']));
+        return SandboxResource::collection(SandboxSearch::apply($request));
     }
 
     /**

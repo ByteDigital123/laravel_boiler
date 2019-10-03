@@ -12,15 +12,21 @@ class Sandbox extends Model
     public $table = 'sandbox';
 
     protected $fillable = [
-      'name'
+      'name',
+      'origin',
+      'voucher',
+      'admin_user_id'
     ];
 
     public $searchable = [
-        'name',
-        'email'
+        'name'
     ];
 
-    public function admin_user()
+    protected $with = [
+      'adminUser'
+    ];
+
+    public function adminUser()
     {
         return $this->belongsTo(AdminUser::class);
     }

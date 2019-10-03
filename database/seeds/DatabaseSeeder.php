@@ -19,8 +19,7 @@ class DatabaseSeeder extends Seeder
         // $this->command->line("Data cleared, starting from blank database.");
 
 
-        if(!\App\AdminUser::where('email', '=', 'admin@nucleus.org')->exists()){
-
+        if (! \App\AdminUser::where('email', '=', 'admin@nucleus.org')->exists()) {
             $this->call(AdminUserSeeder::class);
 
             $this->call(RolesAndPermissionsSeeder::class);
@@ -38,6 +37,7 @@ class DatabaseSeeder extends Seeder
 
             \Artisan::call('passport:install');
 
-    }
+            $this->call(SandboxSeeder::class);
+        }
     }
 }
