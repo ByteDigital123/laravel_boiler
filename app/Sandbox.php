@@ -14,4 +14,14 @@ class Sandbox extends Model
     protected $fillable = [
       'name'
     ];
+
+    protected $searchable = [
+        'name',
+        'email'
+    ];
+
+    public function getSearchable()
+    {
+        return $this->searchable;
+    }
 }

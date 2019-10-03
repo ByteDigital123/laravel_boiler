@@ -1,5 +1,8 @@
 name: nucleusbackend
 recipe: laravel
+services:
+  database:
+    portforward: 32874
 config:
   php: 7.2
   via: nginx
