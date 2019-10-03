@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\AdminUser;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\SearchFilters\AdminUser\AdminUserSearch;
@@ -69,9 +70,8 @@ class AdminUserController extends Controller
      */
     public function update($id, UpdateAdminUserRequest $request)
     {
-        $attributes = $request->all();
-
-        return $this->user->update($id, $attributes);
+        $user = AdminUser::find($id);
+        return $this->user->update($user, $request->all());
     }
 
     /**

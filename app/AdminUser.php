@@ -34,7 +34,8 @@ class AdminUser extends Authenticatable
     protected $casts = [
         'is_admin' => 'boolean',
         'roles' => 'array',
-        'permissions' => 'array'
+        'permissions' => 'array',
+        'id' => 'integer'
     ];
 
     protected $with = [

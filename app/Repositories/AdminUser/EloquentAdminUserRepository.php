@@ -3,6 +3,7 @@
 namespace App\Repositories\AdminUser;
 
 use App\AdminUser;
+use Illuminate\Support\Facades\DB;
 use App\Repositories\BaseRepository;
 use Illuminate\Support\Facades\Hash;
 
@@ -24,7 +25,7 @@ class EloquentAdminUserRepository extends BaseRepository implements AdminUserInt
      */
     public function create(array $attributes)
     {
-        Db::transaction(function () use ($attributes) {
+        DB::transaction(function () use ($attributes) {
             $user = $this->model->create([
                 'first_name' => $attributes['first_name'],
                 'last_name' => $attributes['last_name'],
@@ -46,19 +47,22 @@ class EloquentAdminUserRepository extends BaseRepository implements AdminUserInt
      * @param  array  $attributes [description]
      * @return [type]             [description]
      */
-    public function update($id, array $attributes)
+    public function update($adminUser, array $attributes)
     {
-        Db::transaction(function () use ($attributes) {
-            $user = $this->model->find($id);
-
-            $user->update($attributes);
+        DB::transaction(function () use ($adminUser, $attributes) {
+            $adminUser->update([
+                'first_name' => $attributes['first_name'],
+                'last_name' => $attributes['last_name'],
+                'email' => $attributes['email'],
+                'password' => Hash::make($attributes['password'])
+            ]);
 
             if (isset($attributes['password'])) {
-                $user->password = Hash::make($attributes['password']);
-                $user->save();
+                $adminUser->password = Hash::make($attributes['password']);
+                $adminUser->save();
             }
 
-            $user->givePermissionTo(array_map(function ($permission) {
+            $adminUser->givePermissionTo(array_map(function ($permission) {
                 return $permission['name'];
             }, $attributes['permissions']));
         });
