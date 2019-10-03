@@ -15,13 +15,13 @@ class Sandbox extends Model
       'name'
     ];
 
-    protected $searchable = [
+    public $searchable = [
         'name',
         'email'
     ];
 
-    public function getSearchable()
+    public function admin_user()
     {
-        return $this->searchable;
+        return $this->belongsTo(AdminUser::class);
     }
 }

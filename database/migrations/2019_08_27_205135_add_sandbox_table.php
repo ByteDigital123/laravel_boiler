@@ -13,11 +13,14 @@ class AddSandboxTable extends Migration
      */
     public function up()
     {
-      Schema::create('sandbox', function (Blueprint $table) {
-          $table->bigIncrements('id');
-          $table->string('name');
-          $table->nullableTimestamps();
-      });
+        Schema::create('sandbox', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedInteger('admin_user_id')->index();
+            $table->string('name');
+            $table->string('origin');
+            $table->boolean('voucher')->default(0);
+            $table->nullableTimestamps();
+        });
     }
 
     /**

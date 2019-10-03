@@ -6,6 +6,8 @@ class Taken_By
 {
     public static function apply($builder, $value)
     {
-        return $builder->admin_user()->where('id', $value);
+        return $builder->whereHas('admin_user', function ($query) use ($value) {
+            $query->where('id', $value);
+        });
     }
 }
