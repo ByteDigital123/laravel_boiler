@@ -16,10 +16,11 @@ class AddSandboxTable extends Migration
         Schema::create('sandbox', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedInteger('admin_user_id')->index();
-            $table->string('name');
-            $table->string('origin');
-            $table->boolean('voucher')->default(0);
+            $table->string('name')->index();
+            $table->string('origin')->index();
+            $table->boolean('voucher')->index()->default(0);
             $table->nullableTimestamps();
+            $table->index(['created_at', 'updated_at']);
         });
     }
 

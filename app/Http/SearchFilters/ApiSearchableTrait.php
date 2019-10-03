@@ -11,7 +11,7 @@ trait ApiSearchableTrait
     {
         $query = static::applyDecoratorsFromRequest($filters, (new self::$model)->newQuery());
 
-        return $query->paginate($filters->paginate);
+        return $query->paginate($filters->pagination);
     }
     
     private static function applyDecoratorsFromRequest(Request $request, Builder $query)

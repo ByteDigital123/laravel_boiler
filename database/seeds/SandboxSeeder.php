@@ -12,6 +12,6 @@ class SandboxSeeder extends Seeder
      */
     public function run()
     {
-        factory(Sandbox::class, 100)->create();
+        factory(Sandbox::class, 500)->create();
     }
 }

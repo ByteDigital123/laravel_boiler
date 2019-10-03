@@ -6,6 +6,6 @@ class From
 {
     public static function apply($builder, $value)
     {
-        return $builder->where('created_at', '>=', $value);
+        return $builder->where('updated_at', '>=', $value);
     }
 }
