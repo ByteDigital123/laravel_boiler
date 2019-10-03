@@ -19,7 +19,6 @@ class AdminUserResource extends JsonResource
            'email' => $this->email,
            'first_name' => $this->first_name,
            'last_name' => $this->last_name,
-           'isSuperAdmin' => $this->isSuperAdmin($this->id),
            'permissions' => $this->getPermissionsViaRoles()
        ];
     }

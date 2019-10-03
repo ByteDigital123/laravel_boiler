@@ -16,7 +16,6 @@ class EloquentRoleRepository extends BaseRepository implements RoleInterface
         $this->model = $model;
     }
 
-
     public function getAll()
     {
         return $this->model->get();
