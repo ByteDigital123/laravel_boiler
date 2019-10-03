@@ -14,15 +14,13 @@ class AdminUserResource extends JsonResource
      */
     public function toArray($request)
     {
-
-       return [
+        return [
            'id' => $this->id,
            'email' => $this->email,
            'first_name' => $this->first_name,
            'last_name' => $this->last_name,
-           'role' => $this->getRoleNames(),
            'isSuperAdmin' => $this->isSuperAdmin($this->id),
-           'permissions' => $this->getPermissionsViaRoles()->pluck('name')
+           'permissions' => $this->getPermissionsViaRoles()
        ];
     }
 }

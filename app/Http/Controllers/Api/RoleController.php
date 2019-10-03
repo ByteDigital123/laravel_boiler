@@ -2,20 +2,19 @@
 
 namespace App\Http\Controllers\Api;
 
-use Validator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
-use App\Http\Resources\Role\RoleResource;
 use App\Repositories\Role\RoleInterface;
-use App\Http\Requests\Role\StoreRoleRequest;
-use App\Http\Requests\Role\UpdateRoleRequest;
+use App\Http\Resources\Role\RoleResource;
+use App\Http\Requests\Api\Role\StoreRoleRequest;
+use App\Http\Requests\Api\Role\UpdateRoleRequest;
 
 class RoleController extends Controller
 {
     protected $role;
 
-    public function __construct(RoleInterface $role){
+    public function __construct(RoleInterface $role)
+    {
         $this->role = $role;
     }
 
@@ -66,7 +65,6 @@ class RoleController extends Controller
         $attributes = $request->all();
 
         return $this->role->update($id, $attributes);
-
     }
 
     /**

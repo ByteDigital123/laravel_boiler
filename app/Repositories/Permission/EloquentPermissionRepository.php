@@ -2,7 +2,6 @@
 
 namespace App\Repositories\Permission;
 
-
 use App\Repositories\Permission\PermissionInterface as PermissionInterface;
 use App\Permission;
 use App\Repositories\BaseRepository;
@@ -11,7 +10,8 @@ class EloquentPermissionRepository extends BaseRepository implements PermissionI
 {
     public $model;
 
-    function __construct(Permission $model) {
+    public function __construct(Permission $model)
+    {
         $this->model = $model;
     }
 }

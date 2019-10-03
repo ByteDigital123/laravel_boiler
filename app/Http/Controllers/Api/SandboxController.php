@@ -11,8 +11,6 @@ use App\Http\Requests\Api\Sandbox\SandboxRequest;
 
 class SandboxController extends Controller
 {
-
-
     /**
      * Display a listing of the resource.
      *

@@ -37,6 +37,10 @@ class AdminUser extends Authenticatable
         'permissions' => 'array'
     ];
 
+    protected $with = [
+        'permissions'
+    ];
+
 
     /**
      * The attributes that should be hidden for arrays.
@@ -47,38 +51,14 @@ class AdminUser extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function permisions()
+    {
+        return $this->hasMany(Permission::class);
+    }
+
 
     public function AauthAcessToken()
     {
         return $this->hasMany('\App\OauthAccessToken');
-    }
-
-    /**
-     * Return all the permissions the model has, both directly and via roles.
-     * @return [type] [description]
-     */
-    public function getAllPermissions()
-    {
-        return $this->permissions
-            ->merge($this->getPermissionsViaRoles())
-            ->sort()
-            ->values();
-    }
-
-    /**
-     * Check if the user is Super Admin
-     * (well, right now it's just hardcoded for id:1)
-     * #Spaghetti
-     * ---------- What the fuck is going on here! ---------
-     * @param  [type]  $value [description]
-     * @return boolean        [description]
-     */
-    public function isSuperAdmin($value)
-    {
-        if ($value === 1) {
-            return true;
-        } else {
-            return false;
-        }
     }
 }

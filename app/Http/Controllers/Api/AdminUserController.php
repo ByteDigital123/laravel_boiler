@@ -2,23 +2,19 @@
 
 namespace App\Http\Controllers\Api;
 
-use DB;
-use Validator;
-use App\AdminUser;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
-use App\Http\Resources\Api\AdminUser\AdminUserResource;
+use App\SearchFilters\AdminUser\AdminUserSearch;
 use App\Repositories\AdminUser\AdminUserInterface;
+use App\Http\Resources\Api\AdminUser\AdminUserResource;
 use App\Http\Requests\Api\AdminUser\UpdateAdminUserRequest;
-use App\Http\Requests\AdminUser\StoreAdminUserRequest;
 
 class AdminUserController extends Controller
 {
-
     protected $user;
 
-    public function __construct(AdminUserInterface $user){
+    public function __construct(AdminUserInterface $user)
+    {
         $this->user = $user;
     }
 
@@ -27,9 +23,9 @@ class AdminUserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return AdminUserResource::collection($this->user->all());
+        return AdminUserResource::collection(AdminUserSearch::apply($request));
     }
 
 
@@ -86,11 +82,8 @@ class AdminUserController extends Controller
      */
     public function destroy(Request $request)
     {
-
         $attributes = $request->json()->all();
 
         return $this->user->destroy($attributes);
     }
-
-
 }
