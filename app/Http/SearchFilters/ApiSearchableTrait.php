@@ -19,7 +19,7 @@ trait ApiSearchableTrait
         $query = static::applySearchDecorators($request, $query);
         $query = static::applyFilterDecorators($request, $query);
 
-        $query->orderBy($request->sort ? $request->sort : 'created_at', $request->order ? $request->order : 'asc');
+        $query->orderBy($request->sort ? $request->sort : 'updated_at', $request->order ? $request->order : 'asc');
 
         //dd(\App\Helpers\Helpers::returnSqlWithBindings($query));
         return $query;
