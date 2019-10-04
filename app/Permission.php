@@ -8,7 +8,7 @@ namespace App;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
-use Reliese\Database\Eloquent\Model;
+use Spatie\Permission\Models\Permission;
 
 /**
  * Class Permission

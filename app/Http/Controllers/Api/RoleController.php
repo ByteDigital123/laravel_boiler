@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use App\Repositories\Role\RoleInterface;
 use App\Http\Resources\Role\RoleResource;
@@ -25,6 +26,7 @@ class RoleController extends Controller
      */
     public function index()
     {
+        $this->authorize('list', Role::class);
         return RoleResource::collection($this->role->all());
     }
 
@@ -36,6 +38,7 @@ class RoleController extends Controller
      */
     public function store(StoreRoleRequest $request)
     {
+        $this->authorize('create', Role::class);
         $attributes = $request->all();
 
         return $this->role->create($attributes);
@@ -49,6 +52,7 @@ class RoleController extends Controller
      */
     public function show($id)
     {
+        $this->authorize('view', Role::class);
         return new RoleResource($this->role->getById($id));
     }
 
@@ -62,6 +66,7 @@ class RoleController extends Controller
      */
     public function update($id, UpdateRoleRequest $request)
     {
+        $this->authorize('update', Role::class);
         $attributes = $request->all();
 
         return $this->role->update($id, $attributes);
@@ -75,6 +80,8 @@ class RoleController extends Controller
      */
     public function destroy(Request $request)
     {
+        $this->authorize('delete', Role::class);
+
         $attributes = $request->json()->all();
 
         return $this->role->deleteMultipleById($attributes);
