@@ -26,9 +26,9 @@ class StoreAdminUserRequest extends FormRequest
         return [
             'first_name' => 'required',
             'last_name' => 'required',
-            'email' => 'email|required',
+            'email' => 'email|required|unique:admin_users',
             'password' => 'required|confirmed',
-            'permissions' => 'required|array'
+            'role' => 'required|array'
         ];
     }
 }

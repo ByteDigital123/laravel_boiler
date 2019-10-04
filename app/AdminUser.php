@@ -48,7 +48,6 @@ class AdminUser extends Authenticatable
         'email',
     ];
 
-
     /**
      * The attributes that should be hidden for arrays.
      *

@@ -22,10 +22,10 @@ Route::group(['middleware' => 'auth:admin_api'], function () {
     // USERS
     Route::get('admin-users/current', 'Api\AdminUserController@currentUser');
     Route::get('admin-users', 'Api\AdminUserController@index');
-    Route::get('admin-users/{adminUser}', 'Api\AdminUserController@show');
+    Route::get('admin-users/{user}', 'Api\AdminUserController@show');
     Route::post('admin-users', 'Api\AdminUserController@store');
     Route::delete('admin-users/', 'Api\AdminUserController@destroy');
-    Route::put('admin-users/{AdminUser}', 'Api\AdminUserController@update');
+    Route::put('admin-users/{user}', 'Api\AdminUserController@update');
 
     // ROLES
     Route::get('roles', 'Api\RoleController@index');

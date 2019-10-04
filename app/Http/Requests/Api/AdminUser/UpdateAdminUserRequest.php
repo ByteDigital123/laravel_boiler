@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Api\AdminUser;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateAdminUserRequest extends FormRequest
@@ -26,9 +27,9 @@ class UpdateAdminUserRequest extends FormRequest
         return [
             'first_name' => 'required',
             'last_name' => 'required',
-            'email' => 'email|required',
+            'email' => ['required', 'email', Rule::unique('users')->ignore($this->user()->id)],
             'password' => 'required|confirmed',
-            'permissions' => 'required|array'
+            'role' => 'required|array'
         ];
     }
 }

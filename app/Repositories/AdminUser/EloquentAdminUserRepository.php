@@ -33,9 +33,7 @@ class EloquentAdminUserRepository extends BaseRepository implements AdminUserInt
                 'password' => Hash::make($attributes['password'])
             ]);
 
-            $user->givePermissionTo(array_map(function ($permission) {
-                return $permission['name'];
-            }, $attributes['permissions']));
+            $user->assignRole($attributes['role']['name']);
         });
 
         return response()->success('The user has been created');
@@ -62,9 +60,7 @@ class EloquentAdminUserRepository extends BaseRepository implements AdminUserInt
                 $adminUser->save();
             }
 
-            $adminUser->givePermissionTo(array_map(function ($permission) {
-                return $permission['name'];
-            }, $attributes['permissions']));
+            $adminUser->assignRole($attributes['role']['name']);
         });
 
 

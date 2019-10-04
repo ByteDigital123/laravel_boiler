@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 use App\SearchFilters\AdminUser\AdminUserSearch;
 use App\Repositories\AdminUser\AdminUserInterface;
 use App\Http\Resources\Api\AdminUser\AdminUserResource;
-use App\Http\Requests\Api\AdminUser\UpdateAdminUserRequest;
+use App\Http\Requests\Api\AdminUser\StoreAdminUserRequest;
 
 class AdminUserController extends Controller
 {
@@ -42,7 +42,7 @@ class AdminUserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreAdminUserRequest $request)
     {
         $attributes = $request->all();
 
@@ -68,7 +68,7 @@ class AdminUserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($id, UpdateAdminUserRequest $request)
+    public function update($id, Request $request)
     {
         $user = AdminUser::find($id);
         return $this->user->update($user, $request->all());
