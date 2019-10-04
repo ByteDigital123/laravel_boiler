@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\AdminUser;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\SearchFilters\AdminUser\AdminUserSearch;
 use App\Repositories\AdminUser\AdminUserInterface;
 use App\Http\Resources\Api\AdminUser\AdminUserResource;
@@ -17,6 +18,7 @@ class AdminUserController extends Controller
     public function __construct(AdminUserInterface $user)
     {
         $this->user = $user;
+        //$this->authorizeResource(AdminUser::class);
     }
 
     /**
@@ -26,6 +28,7 @@ class AdminUserController extends Controller
      */
     public function index(Request $request)
     {
+        $this->authorize('list', Auth::user());
         return AdminUserResource::collection(AdminUserSearch::apply($request));
     }
 
@@ -44,6 +47,8 @@ class AdminUserController extends Controller
      */
     public function store(StoreAdminUserRequest $request)
     {
+        $this->authorize('create', Auth::user());
+
         $attributes = $request->all();
 
         return $this->user->create($attributes);
@@ -57,6 +62,7 @@ class AdminUserController extends Controller
      */
     public function show($id)
     {
+        $this->authorize('view', Auth::user());
         return new AdminUserResource($this->user->getById($id));
     }
 
@@ -70,6 +76,7 @@ class AdminUserController extends Controller
      */
     public function update($id, Request $request)
     {
+        $this->authorize('update', Auth::user());
         $user = AdminUser::find($id);
         return $this->user->update($user, $request->all());
     }
@@ -82,6 +89,7 @@ class AdminUserController extends Controller
      */
     public function destroy(Request $request)
     {
+        $this->authorize('delete', Auth::user());
         $attributes = $request->json()->all();
 
         return $this->user->destroy($attributes);

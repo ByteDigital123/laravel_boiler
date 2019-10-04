@@ -23,6 +23,11 @@ class RolesAndPermissionsSeeder extends Seeder
             'model' => 'Admin User'
         ]);
         Permission::create([
+            'name' => 'list_admin_user',
+            'label' => 'List Admin User',
+            'model' => 'Admin User'
+        ]);
+        Permission::create([
             'name' => 'view_admin_user',
             'label' => 'View Admin User',
             'model' => 'Admin User'
@@ -38,24 +43,33 @@ class RolesAndPermissionsSeeder extends Seeder
             'model' => 'Admin User'
         ]);
 
+
+
         // create roles
         Permission::create([
-            'name' => 'create_admin_role',
+            'name' => 'create_role',
             'label' => 'Create Role',
             'model' => 'Role'
         ]);
         Permission::create([
-            'name' => 'view_admin_role',
+            'name' => 'list_role',
             'label' => 'View Role',
             'model' => 'Role'
         ]);
+
         Permission::create([
-            'name' => 'update_admin_role',
+            'name' => 'view_role',
+            'label' => 'View Role',
+            'model' => 'Role'
+        ]);
+
+        Permission::create([
+            'name' => 'update_role',
             'label' => 'Update Role',
             'model' => 'Role'
         ]);
         Permission::create([
-            'name' => 'delete_admin_role',
+            'name' => 'delete_role',
             'label' => 'Delete Role',
             'model' => 'Role'
         ]);

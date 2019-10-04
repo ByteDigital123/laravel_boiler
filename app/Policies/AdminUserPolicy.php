@@ -9,15 +9,21 @@ class AdminUserPolicy
 {
     use HandlesAuthorization;
 
+    protected $className = 'admin_user';
+
+
     /**
-     * Determine whether the user can view any admin users.
+     * Determine whether the user can view the admin user.
      *
      * @param  \App\AdminUser  $user
+     * @param  \App\AdminUser  $adminUser
      * @return mixed
      */
-    public function viewAny(AdminUser $user)
+    public function list(AdminUser $user)
     {
-        //
+        if ($user->can(__FUNCTION__ . '_' . $this->className)) {
+            return true;
+        }
     }
 
     /**
@@ -27,9 +33,9 @@ class AdminUserPolicy
      * @param  \App\AdminUser  $adminUser
      * @return mixed
      */
-    public function view(AdminUser $user, AdminUser $adminUser)
+    public function view(AdminUser $user)
     {
-        if ($user->hasPermissionTo('View Users')) {
+        if ($user->can(__FUNCTION__ . '_' . $this->className)) {
             return true;
         }
     }
@@ -42,7 +48,9 @@ class AdminUserPolicy
      */
     public function create(AdminUser $user)
     {
-        //
+        if ($user->can(__FUNCTION__ . '_' . $this->className)) {
+            return true;
+        }
     }
 
     /**
@@ -52,9 +60,9 @@ class AdminUserPolicy
      * @param  \App\AdminUser  $adminUser
      * @return mixed
      */
-    public function update(AdminUser $user, AdminUser $adminUser)
+    public function update(AdminUser $user)
     {
-        if ($user->hasPermissionTo('Edit Users')) {
+        if ($user->can(__FUNCTION__ . '_' . $this->className)) {
             return true;
         }
     }
@@ -66,32 +74,10 @@ class AdminUserPolicy
      * @param  \App\AdminUser  $adminUser
      * @return mixed
      */
-    public function delete(AdminUser $user, AdminUser $adminUser)
+    public function delete(AdminUser $user)
     {
-        //
-    }
-
-    /**
-     * Determine whether the user can restore the admin user.
-     *
-     * @param  \App\AdminUser  $user
-     * @param  \App\AdminUser  $adminUser
-     * @return mixed
-     */
-    public function restore(AdminUser $user, AdminUser $adminUser)
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can permanently delete the admin user.
-     *
-     * @param  \App\AdminUser  $user
-     * @param  \App\AdminUser  $adminUser
-     * @return mixed
-     */
-    public function forceDelete(AdminUser $user, AdminUser $adminUser)
-    {
-        //
+        if ($user->can(__FUNCTION__ . '_' . $this->className)) {
+            return true;
+        }
     }
 }
