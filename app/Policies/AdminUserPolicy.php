@@ -3,6 +3,7 @@
 namespace App\Policies;
 
 use App\AdminUser;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class AdminUserPolicy
@@ -19,9 +20,9 @@ class AdminUserPolicy
      * @param  \App\AdminUser  $adminUser
      * @return mixed
      */
-    public function list(AdminUser $user)
+    public function list()
     {
-        if ($user->can(__FUNCTION__ . '_' . $this->className)) {
+        if (Auth::user()->can(__FUNCTION__ . '_' . $this->className)) {
             return true;
         }
     }
@@ -33,9 +34,9 @@ class AdminUserPolicy
      * @param  \App\AdminUser  $adminUser
      * @return mixed
      */
-    public function view(AdminUser $user)
+    public function view()
     {
-        if ($user->can(__FUNCTION__ . '_' . $this->className)) {
+        if (Auth::user()->can(__FUNCTION__ . '_' . $this->className)) {
             return true;
         }
     }
@@ -46,9 +47,9 @@ class AdminUserPolicy
      * @param  \App\AdminUser  $user
      * @return mixed
      */
-    public function create(AdminUser $user)
+    public function create()
     {
-        if ($user->can(__FUNCTION__ . '_' . $this->className)) {
+        if (Auth::user()->can(__FUNCTION__ . '_' . $this->className)) {
             return true;
         }
     }
@@ -60,9 +61,9 @@ class AdminUserPolicy
      * @param  \App\AdminUser  $adminUser
      * @return mixed
      */
-    public function update(AdminUser $user)
+    public function update()
     {
-        if ($user->can(__FUNCTION__ . '_' . $this->className)) {
+        if (Auth::user()->can(__FUNCTION__ . '_' . $this->className)) {
             return true;
         }
     }
@@ -74,9 +75,9 @@ class AdminUserPolicy
      * @param  \App\AdminUser  $adminUser
      * @return mixed
      */
-    public function delete(AdminUser $user)
+    public function delete()
     {
-        if ($user->can(__FUNCTION__ . '_' . $this->className)) {
+        if (Auth::user()->can(__FUNCTION__ . '_' . $this->className)) {
             return true;
         }
     }

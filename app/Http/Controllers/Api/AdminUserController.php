@@ -18,7 +18,6 @@ class AdminUserController extends Controller
     public function __construct(AdminUserInterface $user)
     {
         $this->user = $user;
-        //$this->authorizeResource(AdminUser::class);
     }
 
     /**

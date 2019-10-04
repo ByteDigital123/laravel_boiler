@@ -17,22 +17,4 @@ class Controller extends BaseController
     use DispatchesJobs, ValidatesRequests;
 
     use AuthorizesRequests;
-
-    /**
-     * Get the map of resource methods to ability names.
-     *
-     * @return array
-     */
-    protected function resourceAbilityMap()
-    {
-        return [
-            'index' => 'list',
-            'show' => 'view',
-            'create' => 'create',
-            'store' => 'create',
-            'edit' => 'update',
-            'update' => 'update',
-            'destroy' => 'delete',
-        ];
-    }
 }
