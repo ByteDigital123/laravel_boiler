@@ -1,0 +1,94 @@
+<?php
+
+namespace DummyNamespace;
+
+use Validator;
+use DummyFullModelClass;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\DummyModelClass\DummyResource;
+use App\Repositories\DummyModelClass\DummyInterface;
+use App\Http\Requests\DummyModelClass\DummyUpdateRequest;
+use App\Http\Requests\DummyModelClass\DummyStoreRequest;
+
+class DummyTest extends Controller
+{
+    
+    protected $model;
+
+    public function __construct(DummyInterface $model){
+        $this->model = $model;
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $this->authorize('list', DummyTest::class);
+        return DummyResource::collection($this->model->all());
+    }
+
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(DummyStoreRequest $request)
+    {
+        $this->authorize('create', DummyTest::class);
+
+        $attributes = $request->all();
+
+        return $this->model->create($attributes);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $this->authorize('view', DummyTest::class);
+        return new DummyResource($this->model->getById($id));
+    }
+
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update($id, DummyUpdateRequest $request)
+    {
+        $this->authorize('update', DummyTest::class);
+
+        $attributes = $request->all();
+
+        return $this->model->updateById($id, $attributes);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Request $request)
+    {
+        $this->authorize('delete', DummyTest::class);
+        
+        $attributes = $request->json()->all();      
+
+        return $this->model->deleteMultipleById($attributes);
+    }
+
+}

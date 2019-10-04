@@ -1,31 +1,28 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App\Console\Commands\Boilerplate;
 
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Support\Str;
 use InvalidArgumentException;
 use Symfony\Component\Console\Input\InputOption;
 
-class CreateInterface extends GeneratorCommand
+class ScaffoldController extends GeneratorCommand
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $name = 'make:interface';
+    protected $name = 'scaffold:controller';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Create Interface';
-
-
-
-    protected $type = "Interface";
+        
+    protected $type = "Controller";
 
     /**
      * Get the stub file for the generator.
@@ -33,8 +30,8 @@ class CreateInterface extends GeneratorCommand
      * @return string
      */
     protected function getStub()
-    {        
-        return './app/Console/stubs/Interface.stub';
+    {
+        return './app/Console/stubs/Controller.stub';
     }
 
     /**
@@ -57,7 +54,7 @@ class CreateInterface extends GeneratorCommand
         ];
     }
 
-      /**
+    /**
      * Build the class with the given name.
      *
      * @param string $name
@@ -73,23 +70,32 @@ class CreateInterface extends GeneratorCommand
         }
 
         return str_replace(
-            array_keys($replace), array_values($replace), parent::buildClass($name)
+            array_keys($replace),
+            array_values($replace),
+            parent::buildClass($name)
         );
     }
 
-     /**
-     * Build the replacement values.
-     *
-     * @param array $replace
-     *
-     * @return array
-     */
+
+    /**
+    * Build the replacement values.
+    *
+    * @param array $replace
+    *
+    * @return array
+    */
     protected function buildModelReplacements(array $replace)
     {
-        $modelClass = $this->parseModel($this->option('model'));        
+        $modelClass = $this->parseModel($this->option('model'));
 
-        return array_merge($replace, [            
+        return array_merge($replace, [
+            'DummyFullModelClass' => $modelClass,
+            'DummyModelClass'     => class_basename($modelClass),
             'DummyInterface'      => class_basename($modelClass) . 'Interface',
+            'DummyTest'          => class_basename($modelClass) . 'Controller',
+            'DummyResource'       => class_basename($modelClass) . 'Resource',
+            'DummyUpdateRequest'  => 'Update' . class_basename($modelClass) . 'Request',
+            'DummyStoreRequest'   => 'Store' . class_basename($modelClass) . 'Request',
         ]);
     }
 
@@ -108,22 +114,22 @@ class CreateInterface extends GeneratorCommand
 
         $model = trim(str_replace('/', '\\', $model), '\\');
         
-        if (!Str::startsWith($model, $rootNamespace = $this->laravel->getNamespace())) {
+        if (! Str::startsWith($model, $rootNamespace = $this->laravel->getNamespace())) {
             $model = $rootNamespace . $model;
-        }       
+        }
         
         return $model;
     }
 
-     /**
-     * Get the default namespace for the class.
-     *
-     * @param string $rootNamespace
-     *
-     * @return string
-     */
+    /**
+    * Get the default namespace for the class.
+    *
+    * @param string $rootNamespace
+    *
+    * @return string
+    */
     protected function getDefaultNamespace($rootNamespace)
     {
-        return $rootNamespace . '\Repositories\\' . $this->option('model') ;
+        return $rootNamespace . '\Http\Controllers\\' . $this->option('location') ;
     }
 }

@@ -1,31 +1,31 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App\Console\Commands\Boilerplate;
 
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Support\Str;
 use InvalidArgumentException;
 use Symfony\Component\Console\Input\InputOption;
 
-class CreateServiceProvider extends GeneratorCommand
+class ScaffoldInterface extends GeneratorCommand
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $name = 'make:serviceProvider';
+    protected $name = 'scaffold:interface';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Create Repository Service Provider';
+    protected $description = 'Create Interface';
 
 
 
-    protected $type = "Service Provider";
+    protected $type = "Interface";
 
     /**
      * Get the stub file for the generator.
@@ -33,8 +33,8 @@ class CreateServiceProvider extends GeneratorCommand
      * @return string
      */
     protected function getStub()
-    {        
-        return './app/Console/stubs/RepoServiceProvider.stub';
+    {
+        return './app/Console/stubs/Interface.stub';
     }
 
     /**
@@ -57,7 +57,7 @@ class CreateServiceProvider extends GeneratorCommand
         ];
     }
 
-      /**
+    /**
      * Build the class with the given name.
      *
      * @param string $name
@@ -73,28 +73,25 @@ class CreateServiceProvider extends GeneratorCommand
         }
 
         return str_replace(
-            array_keys($replace), array_values($replace), parent::buildClass($name)
+            array_keys($replace),
+            array_values($replace),
+            parent::buildClass($name)
         );
     }
 
-     /**
-     * Build the replacement values.
-     *
-     * @param array $replace
-     *
-     * @return array
-     */
+    /**
+    * Build the replacement values.
+    *
+    * @param array $replace
+    *
+    * @return array
+    */
     protected function buildModelReplacements(array $replace)
     {
-        $modelClass = $this->parseModel($this->option('model'));        
+        $modelClass = $this->parseModel($this->option('model'));
 
         return array_merge($replace, [
-            'DummyFullModelClass' => $modelClass,
-            'DummyModelClass'     => class_basename($modelClass),
             'DummyInterface'      => class_basename($modelClass) . 'Interface',
-            'DummyClass'          => class_basename($modelClass) . 'RoleRepoServiceProvider',
-            'DummyFullInterface'  => 'App\Repositories\\' . class_basename($modelClass) . '\\' . class_basename($modelClass) . 'Interface',
-            'DummyFullRepository' => 'App\Repositories\\' . class_basename($modelClass) . '\Eloquent' . class_basename($modelClass) . 'Repository',
         ]);
     }
 
@@ -113,20 +110,20 @@ class CreateServiceProvider extends GeneratorCommand
 
         $model = trim(str_replace('/', '\\', $model), '\\');
         
-        if (!Str::startsWith($model, $rootNamespace = $this->laravel->getNamespace())) {
+        if (! Str::startsWith($model, $rootNamespace = $this->laravel->getNamespace())) {
             $model = $rootNamespace . $model;
-        }       
+        }
         
         return $model;
     }
 
-     /**
-     * Get the default namespace for the class.
-     *
-     * @param string $rootNamespace
-     *
-     * @return string
-     */
+    /**
+    * Get the default namespace for the class.
+    *
+    * @param string $rootNamespace
+    *
+    * @return string
+    */
     protected function getDefaultNamespace($rootNamespace)
     {
         return $rootNamespace . '\Repositories\\' . $this->option('model') ;

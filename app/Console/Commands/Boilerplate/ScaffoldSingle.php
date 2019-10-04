@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App\Console\Commands\Boilerplate;
 
 use Illuminate\Console\Command;
 
@@ -18,7 +18,7 @@ class ScaffoldSingle extends Command
      *
      * @var string
      */
-    protected $description = 'Create files for given model';
+    protected $description = 'Scaffold files for given model';
 
     /**
      * Create a new command instance.
@@ -44,81 +44,74 @@ class ScaffoldSingle extends Command
         // 1. create controllers
         
         try {
-            
             $this->info('Creating Controller');
 
-            \Artisan::call('create:controller',  [
+            \Artisan::call('scaffold:controller', [
                 'name' => $model . "Controller",
                 '--model' => $model,
                 '--location' => $location
             ]);
-
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             $this->error($e->getMessage());
         }
 
         // 2. create resources
         
         try {
-
             $this->info('Creating Resources');
 
-            \Artisan::call('make:resource',  [
+            \Artisan::call('scaffold:resource', [
                 'name' => $location . "\\"  . $model . "\\" . $model . "Resource"
             ]);
 
-             \Artisan::call('make:resource',  [
+            \Artisan::call('scaffold:resource', [
                 'name' => $location . "\\"  . $model . "\\" . $model . "Collection"
             ]);
-
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             $this->error($e->getMessage());
         }
 
         // 3. create requests
         
         try {
+            $this->info('Creating Requests');
 
-        $this->info('Creating Requests');
-
-            \Artisan::call('make:request',  [
+            \Artisan::call('scaffold:request', [
                     'name' => $location . "\\"  . $model . "\Store" . $model . "Request"
                 ]);
 
-                 \Artisan::call('make:request',  [
+            \Artisan::call('scaffold:request', [
                     'name' => $location . "\\"  . $model . "\Update" . $model . "Request"
                 ]);
-
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             $this->error($e->getMessage());
         }
 
         // 4. create repositories
         
         try {
-
             $this->info('Creating Repositories');
             
-            \Artisan::call('make:interface',  [
+            \Artisan::call('scaffold:interface', [
                 'name' => $model . "Interface",
                 '--model' => $model
             ]);
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             $this->error($e->getMessage());
         }
 
         // call Create Repository
-         \Artisan::call('make:repository',  [
+        \Artisan::call('scaffold:repository', [
             'name' => "\Eloquent" . $model . "Repository",
             '--model' => $model
         ]);
         
         // Call Create ServiceProvider
-         \Artisan::call('make:serviceProvider',  [
+        \Artisan::call('scaffold:serviceProvider', [
             'name' => $model . "ServiceProvider",
             '--model' => $model
         ]);
 
-         $this->info('Your files are ready');
+        $this->info('Your files are ready');
     }
 }

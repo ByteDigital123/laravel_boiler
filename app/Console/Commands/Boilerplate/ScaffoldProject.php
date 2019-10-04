@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App\Console\Commands\Boilerplate;
 
 use Illuminate\Console\Command;
 
@@ -37,16 +37,14 @@ class ScaffoldProject extends Command
      */
     public function handle()
     {
-
-        if($this->confirm('Is this the first time you are running the scaffold?')){
-            
+        if ($this->confirm('Is this the first time you are running the scaffold?')) {
             $this->call('migrate:generate');
 
             $this->call('code:models');
         }
 
        
-        $location = $this->choice('Which namespace shall we save them under?', ['Api', 'Website', 'UserDashboard']); 
+        $location = $this->choice('Which namespace shall we save them under?', ['Api', 'Website', 'UserDashboard']);
 
         // 1. create controllers
         
@@ -78,7 +76,15 @@ class ScaffoldProject extends Command
 
         $this->call('create:repository:model');
 
-        $this->info('Files have been completed');
+        // 5. Create Search Filters
 
+        
+
+        // 6. Create Policies
+
+
+        // FINI
+
+        $this->info('Files have been completed');
     }
 }

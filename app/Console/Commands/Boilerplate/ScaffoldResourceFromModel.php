@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App\Console\Commands\Boilerplate;
 
 use Illuminate\Console\Command;
 
-class CreateResourceFromModel extends Command
+class ScaffoldResourceFromModel extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'resource:create:model {--location}';
+    protected $signature = 'scaffold:create:model {--location}';
 
     /**
      * The console command description.
@@ -37,7 +37,6 @@ class CreateResourceFromModel extends Command
      */
     public function handle()
     {
-
         $currentFiles = [
             'AdminUser',
             'Permission',
@@ -46,22 +45,18 @@ class CreateResourceFromModel extends Command
         ];
 
 
-         foreach (glob("./app/*.php") as $file)
-        {
+        foreach (glob("./app/*.php") as $file) {
             $filename = basename($file, '.php');
 
-            if(!in_array($filename, $currentFiles)){
-
-                 \Artisan::call('make:resource',  [
+            if (! in_array($filename, $currentFiles)) {
+                \Artisan::call('make:resource', [
                     'name' => $this->option('location') . "\\"  . $filename . "\\" . $filename . "Resource"
                 ]);
 
-                 \Artisan::call('make:resource',  [
+                \Artisan::call('make:resource', [
                     'name' => $this->option('location') . "\\"  . $filename . "\\" . $filename . "Collection"
                 ]);
-
-             }
-             
+            }
         }
     }
 }

@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App\Console\Commands\Boilerplate;
 
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Support\Str;
 use InvalidArgumentException;
 use Symfony\Component\Console\Input\InputOption;
 
-class CreateRepository extends GeneratorCommand
+class ScaffoldRepository extends GeneratorCommand
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $name = 'make:repository';
+    protected $name = 'scaffold:repository';
 
     /**
      * The console command description.
@@ -31,7 +31,7 @@ class CreateRepository extends GeneratorCommand
      * @return string
      */
     protected function getStub()
-    {        
+    {
         return './app/Console/stubs/EloquentRepository.stub';
     }
 
@@ -55,7 +55,7 @@ class CreateRepository extends GeneratorCommand
         ];
     }
 
-      /**
+    /**
      * Build the class with the given name.
      *
      * @param string $name
@@ -71,20 +71,22 @@ class CreateRepository extends GeneratorCommand
         }
 
         return str_replace(
-            array_keys($replace), array_values($replace), parent::buildClass($name)
+            array_keys($replace),
+            array_values($replace),
+            parent::buildClass($name)
         );
     }
 
-     /**
-     * Build the replacement values.
-     *
-     * @param array $replace
-     *
-     * @return array
-     */
+    /**
+    * Build the replacement values.
+    *
+    * @param array $replace
+    *
+    * @return array
+    */
     protected function buildModelReplacements(array $replace)
     {
-        $modelClass = $this->parseModel($this->option('model'));        
+        $modelClass = $this->parseModel($this->option('model'));
 
         return array_merge($replace, [
             'DummyFullModelClass' => $modelClass,
@@ -108,23 +110,22 @@ class CreateRepository extends GeneratorCommand
 
         $model = trim(str_replace('/', '\\', $model), '\\');
         
-        if (!Str::startsWith($model, $rootNamespace = $this->laravel->getNamespace())) {
+        if (! Str::startsWith($model, $rootNamespace = $this->laravel->getNamespace())) {
             $model = $rootNamespace . $model;
-        }       
+        }
         
         return $model;
     }
 
-     /**
-     * Get the default namespace for the class.
-     *
-     * @param string $rootNamespace
-     *
-     * @return string
-     */
+    /**
+    * Get the default namespace for the class.
+    *
+    * @param string $rootNamespace
+    *
+    * @return string
+    */
     protected function getDefaultNamespace($rootNamespace)
     {
         return $rootNamespace . '\Repositories\\' . $this->option('model') ;
     }
-
 }

@@ -1,28 +1,29 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App\Console\Commands\Boilerplate;
 
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Support\Str;
 use InvalidArgumentException;
 use Symfony\Component\Console\Input\InputOption;
 
-class CreateController extends GeneratorCommand
+class ScaffoldServiceProvider extends GeneratorCommand
 {
-       /**
+    /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $name = 'create:controller';
+    protected $name = 'scaffold:serviceProvider';
 
     /**
      * The console command description.
      *
      * @var string
      */
-        
-    protected $type = "Controller";
+    protected $description = 'Create Repository Service Provider';
+
+    protected $type = "Service Provider";
 
     /**
      * Get the stub file for the generator.
@@ -30,9 +31,9 @@ class CreateController extends GeneratorCommand
      * @return string
      */
     protected function getStub()
-    {        
-        return './app/Console/stubs/Controller.stub';
-    }    
+    {
+        return './app/Console/stubs/RepoServiceProvider.stub';
+    }
 
     /**
      * Get the console command options.
@@ -63,37 +64,37 @@ class CreateController extends GeneratorCommand
      */
     protected function buildClass($name)
     {
-        $replace = [];        
+        $replace = [];
 
         if ($this->option('model')) {
             $replace = $this->buildModelReplacements($replace);
         }
 
         return str_replace(
-            array_keys($replace), array_values($replace), parent::buildClass($name)
+            array_keys($replace),
+            array_values($replace),
+            parent::buildClass($name)
         );
     }
 
-
-     /**
-     * Build the replacement values.
-     *
-     * @param array $replace
-     *
-     * @return array
-     */
+    /**
+    * Build the replacement values.
+    *
+    * @param array $replace
+    *
+    * @return array
+    */
     protected function buildModelReplacements(array $replace)
     {
-        $modelClass = $this->parseModel($this->option('model'));        
+        $modelClass = $this->parseModel($this->option('model'));
 
         return array_merge($replace, [
             'DummyFullModelClass' => $modelClass,
             'DummyModelClass'     => class_basename($modelClass),
             'DummyInterface'      => class_basename($modelClass) . 'Interface',
-            'DummyTest'          => class_basename($modelClass) . 'Controller',
-            'DummyResource'       => class_basename($modelClass) . 'Resource',
-            'DummyUpdateRequest'  => 'Update' . class_basename($modelClass) . 'Request',
-            'DummyStoreRequest'   => 'Store' . class_basename($modelClass) . 'Request',
+            'DummyClass'          => class_basename($modelClass) . 'RoleRepoServiceProvider',
+            'DummyFullInterface'  => 'App\Repositories\\' . class_basename($modelClass) . '\\' . class_basename($modelClass) . 'Interface',
+            'DummyFullRepository' => 'App\Repositories\\' . class_basename($modelClass) . '\Eloquent' . class_basename($modelClass) . 'Repository',
         ]);
     }
 
@@ -112,22 +113,22 @@ class CreateController extends GeneratorCommand
 
         $model = trim(str_replace('/', '\\', $model), '\\');
         
-        if (!Str::startsWith($model, $rootNamespace = $this->laravel->getNamespace())) {
+        if (! Str::startsWith($model, $rootNamespace = $this->laravel->getNamespace())) {
             $model = $rootNamespace . $model;
-        }       
+        }
         
         return $model;
     }
 
-     /**
-     * Get the default namespace for the class.
-     *
-     * @param string $rootNamespace
-     *
-     * @return string
-     */
+    /**
+    * Get the default namespace for the class.
+    *
+    * @param string $rootNamespace
+    *
+    * @return string
+    */
     protected function getDefaultNamespace($rootNamespace)
     {
-        return $rootNamespace . '\Http\Controllers\\' . $this->option('location') ;
+        return $rootNamespace . '\Repositories\\' . $this->option('model') ;
     }
 }

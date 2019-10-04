@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App\Console\Commands\Boilerplate;
 
 use Illuminate\Console\Command;
 
-class CreateRequestFromModel extends Command
+class ScaffoldRequestFromModel extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'request:create:model {--location}';
+    protected $signature = 'scaffold:create:model {--location}';
 
     /**
      * The console command description.
@@ -37,7 +37,6 @@ class CreateRequestFromModel extends Command
      */
     public function handle()
     {
-
         $currentFiles = [
             'AdminUser',
             'Permission',
@@ -45,20 +44,18 @@ class CreateRequestFromModel extends Command
             'Role'
         ];
 
-        foreach (glob("./app/*.php") as $file)
-        {
+        foreach (glob("./app/*.php") as $file) {
             $filename = basename($file, '.php');
 
-            if(!in_array($filename, $currentFiles)){
-
-                 \Artisan::call('make:request',  [
+            if (! in_array($filename, $currentFiles)) {
+                \Artisan::call('make:request', [
                     'name' => $this->option('location') . "\\"  . $filename . "\Store" . $filename . "Request"
                 ]);
 
-                 \Artisan::call('make:request',  [
+                \Artisan::call('make:request', [
                     'name' => $this->option('location') . "\\"  . $filename . "\Update" . $filename . "Request"
                 ]);
-             }
+            }
         }
     }
 }

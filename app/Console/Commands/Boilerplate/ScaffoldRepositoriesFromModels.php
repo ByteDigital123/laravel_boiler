@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App\Console\Commands\Boilerplate;
 
 use Illuminate\Console\Command;
 
-class CreateRepositoriesFromModels extends Command
+class ScaffoldRepositoriesFromModels extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'create:repository:model';
+    protected $signature = 'scaffold:repository:model';
 
     /**
      * The console command description.
@@ -37,7 +37,6 @@ class CreateRepositoriesFromModels extends Command
      */
     public function handle()
     {
-
         $currentFiles = [
             'AdminUser',
             'Permission',
@@ -46,34 +45,31 @@ class CreateRepositoriesFromModels extends Command
         ];
 
 
-        // run through each model            
-        foreach (glob("./app/*.php") as $file)
-        {
+        // run through each model
+        foreach (glob("./app/*.php") as $file) {
             $filename = basename($file, '.php');
 
-            if(!in_array($filename, $currentFiles)){
+            if (! in_array($filename, $currentFiles)) {
 
                 // call Create Interface
-                \Artisan::call('make:interface',  [
+                \Artisan::call('make:interface', [
                     'name' => $filename . "Interface",
                     '--model' => $filename
                 ]);
 
 
                 // call Create Repository
-                 \Artisan::call('make:repository',  [
+                \Artisan::call('make:repository', [
                     'name' => "\Eloquent" . $filename . "Repository",
                     '--model' => $filename
                 ]);
                 
                 // Call Create ServiceProvider
-                 \Artisan::call('make:serviceProvider',  [
+                \Artisan::call('make:serviceProvider', [
                     'name' => $filename . "ServiceProvider",
                     '--model' => $filename
                 ]);
-
-             }
+            }
         }
-        
     }
 }

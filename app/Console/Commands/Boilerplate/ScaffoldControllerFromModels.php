@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App\Console\Commands\Boilerplate;
 
 use Illuminate\Console\Command;
 
-class CreateControllerFromModels extends Command
+class ScaffoldControllerFromModels extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'create:controller:model {--location}';
+    protected $signature = 'scaffold:controller:model {--location}';
 
     /**
      * The console command description.
@@ -37,7 +37,6 @@ class CreateControllerFromModels extends Command
      */
     public function handle()
     {
-
         $currentFiles = [
             'AdminUser',
             'Permission',
@@ -45,19 +44,18 @@ class CreateControllerFromModels extends Command
             'Role'
         ];
 
-        // run through each model            
-        foreach (glob("./app/*.php") as $file)
-        {
+        // run through each model
+        foreach (glob("./app/*.php") as $file) {
             $filename = basename($file, '.php');
 
-            if(!in_array($filename, $currentFiles)){
+            if (! in_array($filename, $currentFiles)) {
                 // call Create Interface
-                \Artisan::call('create:controller',  [
+                \Artisan::call('create:controller', [
                     'name' => $filename . "Controller",
                     '--model' => $filename,
                     '--location' => $this->option('location')
-                ]);  
-            }           
+                ]);
+            }
         }
     }
 }
