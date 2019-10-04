@@ -11,9 +11,10 @@ use App\Http\Requests\PermissionGroup\UpdatePermissionGroupRequest;
 
 class PermissionGroupController extends Controller
 {
-     protected $permissionGroup;
+    protected $permissionGroup;
 
-    public function __construct(PermissionGroupInterface $permissionGroup){
+    public function __construct(PermissionGroupInterface $permissionGroup)
+    {
         $this->permissionGroup = $permissionGroup;
     }
 
@@ -65,7 +66,6 @@ class PermissionGroupController extends Controller
         $attributes = $request->all();
 
         return $this->permissionGroup->update($id, $attributes);
-
     }
 
     /**

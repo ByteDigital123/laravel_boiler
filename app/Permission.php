@@ -38,6 +38,7 @@ class Permission extends Model
     protected $fillable = [
         'name',
         'label',
+        'model',
         'guard_name',
         'permission_group_id'
     ];
@@ -55,5 +56,16 @@ class Permission extends Model
     public function roles()
     {
         return $this->belongsToMany(Role::class, 'role_has_permissions');
+    }
+
+    public function getNameAttriute($value)
+    {
+        return str_slug($this->label);
+    }
+
+    public function setLabelAttribute($value)
+    {
+        $this->attributes['name'] = strtolower(str_replace(' ', '_', $value));
+        $this->attributes['label'] = $value;
     }
 }

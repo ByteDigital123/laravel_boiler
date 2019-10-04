@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Permission;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\Permission\PermissionInterface;
-use App\Http\Resources\Permission\PermissionResource;
+use App\Http\Resources\Api\Permission\PermissionResource;
 
 class PermissionController extends Controller
 {
-
     protected $permission;
 
-    public function __construct(PermissionInterface $permission){
+    public function __construct(PermissionInterface $permission)
+    {
         $this->permission = $permission;
     }
 
@@ -23,7 +24,7 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        return PermissionResource::collection($this->permission->all());
+        return PermissionResource::collection(Permission::all())->groupBy('model');
     }
 
 
@@ -35,7 +36,7 @@ class PermissionController extends Controller
      */
     public function store(Request $request)
     {
-        $attributes = $request->only(['name', 'guard_name']);
+        $attributes = $request->only(['label', 'model']);
 
         return $this->permission->create($attributes);
     }
@@ -61,10 +62,9 @@ class PermissionController extends Controller
      */
     public function update($id, Request $request)
     {
-        $attributes = $request->only(['name']);
+        $attributes = $request->only(['label', 'model']);
 
         return $this->permission->update($id, $attributes);
-
     }
 
     /**
@@ -75,7 +75,6 @@ class PermissionController extends Controller
      */
     public function destroy(Request $request)
     {
-
         $attributes = $this->json()->all();
 
         return $this->permission->destroy($attributes);

@@ -36,6 +36,7 @@ Route::group(['middleware' => 'auth:admin_api'], function () {
 
     // PERMISSIONS
     Route::get('permissions', 'Api\PermissionController@index');
+    Route::post('permissions', 'Api\PermissionController@store');
 
     // PAGES
     Route::get('pages', 'Api\PageController@index');

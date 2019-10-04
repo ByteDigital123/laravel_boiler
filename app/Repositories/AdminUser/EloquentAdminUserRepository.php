@@ -60,7 +60,7 @@ class EloquentAdminUserRepository extends BaseRepository implements AdminUserInt
                 $adminUser->save();
             }
 
-            $adminUser->assignRole($attributes['role']['name']);
+            $adminUser->syncRoles($attributes['role']['name']);
         });
 
 

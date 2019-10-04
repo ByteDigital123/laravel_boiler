@@ -29,9 +29,9 @@ class AdminUserPolicy
      */
     public function view(AdminUser $user, AdminUser $adminUser)
     {
-      if($user->hasPermissionTo('View Users')){
-        return true
-      }
+        if ($user->hasPermissionTo('View Users')) {
+            return true;
+        }
     }
 
     /**
@@ -54,8 +54,8 @@ class AdminUserPolicy
      */
     public function update(AdminUser $user, AdminUser $adminUser)
     {
-        if($user->hasPermissionTo('Edit Users')){
-          return true
+        if ($user->hasPermissionTo('Edit Users')) {
+            return true;
         }
     }
 
