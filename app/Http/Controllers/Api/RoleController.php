@@ -77,6 +77,6 @@ class RoleController extends Controller
     {
         $attributes = $request->json()->all();
 
-        return $this->role->destroy($attributes);
+        return $this->role->deleteMultipleById($attributes);
     }
 }
