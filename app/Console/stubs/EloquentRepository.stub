@@ -2,7 +2,6 @@
 
 namespace DummyNamespace;
 
-
 use App\Repositories\DummyModelClass\DummyInterface;
 use DummyFullModelClass;
 use App\Repositories\BaseRepository;

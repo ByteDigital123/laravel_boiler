@@ -31,7 +31,7 @@ class ScaffoldController extends GeneratorCommand
      */
     protected function getStub()
     {
-        $locationOption = $this->optio('location');
+        $locationOption = $this->option('location');
         if ($locationOption == 'Api') {
             return './app/Console/stubs/ApiController.stub';
         }

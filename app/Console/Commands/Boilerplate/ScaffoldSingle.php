@@ -60,11 +60,11 @@ class ScaffoldSingle extends Command
         try {
             $this->info('Creating Resources');
 
-            \Artisan::call('scaffold:resource', [
+            \Artisan::call('make:resource', [
                 'name' => $location . "\\"  . $model . "\\" . $model . "Resource"
             ]);
 
-            \Artisan::call('scaffold:resource', [
+            \Artisan::call('make:resource', [
                 'name' => $location . "\\"  . $model . "\\" . $model . "Collection"
             ]);
         } catch (\Exception $e) {
@@ -76,11 +76,11 @@ class ScaffoldSingle extends Command
         try {
             $this->info('Creating Requests');
 
-            \Artisan::call('scaffold:request', [
+            \Artisan::call('make:request', [
                     'name' => $location . "\\"  . $model . "\Store" . $model . "Request"
                 ]);
 
-            \Artisan::call('scaffold:request', [
+            \Artisan::call('make:request', [
                     'name' => $location . "\\"  . $model . "\Update" . $model . "Request"
                 ]);
         } catch (\Exception $e) {
@@ -110,6 +110,22 @@ class ScaffoldSingle extends Command
         \Artisan::call('scaffold:serviceProvider', [
             'name' => $model . "ServiceProvider",
             '--model' => $model
+        ]);
+
+        $this->info('Creating Model Search');
+        // Call Create Search
+        \Artisan::call('scaffold:search', [
+            'name' => $model . "Search",
+            '--model' => $model,
+            '--location' => $location
+        ]);
+
+
+        $this->info('Creating Policy');
+        \Artisan::call('scaffold:policy', [
+            'name' => $model . "Policy",
+            '--model' => $model,
+            '--location' => $location
         ]);
 
         $this->info('Your files are ready');

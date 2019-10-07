@@ -2,7 +2,7 @@
 
 namespace App\Policies;
 
-use App\AdminUser;
+use App\DummyClass;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -15,8 +15,8 @@ class DummyClass
     /**
      * Determine whether the user can view the admin user.
      *
-     * @param  \App\AdminUser  $user
-     * @param  \App\AdminUser  $adminUser
+     * @param  \App\DummyClass  $user
+     * @param  \App\DummyClass  $adminUser
      * @return mixed
      */
     public function list()
@@ -29,8 +29,8 @@ class DummyClass
     /**
      * Determine whether the user can view the admin user.
      *
-     * @param  \App\AdminUser  $user
-     * @param  \App\AdminUser  $adminUser
+     * @param  \App\DummyClass  $user
+     * @param  \App\DummyClass  $adminUser
      * @return mixed
      */
     public function view()
@@ -43,7 +43,7 @@ class DummyClass
     /**
      * Determine whether the user can create admin users.
      *
-     * @param  \App\AdminUser  $user
+     * @param  \App\DummyClass  $user
      * @return mixed
      */
     public function create()
@@ -56,8 +56,8 @@ class DummyClass
     /**
      * Determine whether the user can update the admin user.
      *
-     * @param  \App\AdminUser  $user
-     * @param  \App\AdminUser  $adminUser
+     * @param  \App\DummyClass  $user
+     * @param  \App\DummyClass  $adminUser
      * @return mixed
      */
     public function update()
@@ -70,8 +70,8 @@ class DummyClass
     /**
      * Determine whether the user can delete the admin user.
      *
-     * @param  \App\AdminUser  $user
-     * @param  \App\AdminUser  $adminUser
+     * @param  \App\DummyClass  $user
+     * @param  \App\DummyClass  $adminUser
      * @return mixed
      */
     public function delete()

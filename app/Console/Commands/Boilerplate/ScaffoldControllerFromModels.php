@@ -49,7 +49,7 @@ class ScaffoldControllerFromModels extends Command
             $filename = basename($file, '.php');
 
             if (! in_array($filename, $currentFiles)) {
-                // call Create Interface
+                // call Create controller
                 \Artisan::call('create:controller', [
                     'name' => $filename . "Controller",
                     '--model' => $filename,

@@ -89,7 +89,8 @@ class ScaffoldModelSearch extends GeneratorCommand
         $modelClass = $this->parseModel($this->option('model'));
 
         return array_merge($replace, [
-            'DummyClass'     => class_basename($modelClass),
+            'DummyName'         => $this->argument('name'),
+            'ClassName'     => class_basename($modelClass)
         ]);
     }
 
@@ -124,6 +125,6 @@ class ScaffoldModelSearch extends GeneratorCommand
     */
     protected function getDefaultNamespace($rootNamespace)
     {
-        return $rootNamespace . '\Http\\SearchFilters\\' . $this->option('model');
+        return $rootNamespace . '\Http\\SearchFilters\\'. $this->option('location') . '\\' . $this->option('model');
     }
 }
