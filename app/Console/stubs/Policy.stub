@@ -24,6 +24,7 @@ class DummyClass
         if (Auth::user()->can(__FUNCTION__ . '_' . $this->className)) {
             return true;
         }
+        $this->deny();
     }
 
     /**
@@ -38,6 +39,7 @@ class DummyClass
         if (Auth::user()->can(__FUNCTION__ . '_' . $this->className)) {
             return true;
         }
+        $this->deny();
     }
 
     /**
@@ -51,6 +53,7 @@ class DummyClass
         if (Auth::user()->can(__FUNCTION__ . '_' . $this->className)) {
             return true;
         }
+        $this->deny();
     }
 
     /**
@@ -65,6 +68,7 @@ class DummyClass
         if (Auth::user()->can(__FUNCTION__ . '_' . $this->className)) {
             return true;
         }
+        $this->deny();
     }
 
     /**
@@ -79,5 +83,10 @@ class DummyClass
         if (Auth::user()->can(__FUNCTION__ . '_' . $this->className)) {
             return true;
         }
+        $this->deny();
+    }
+
+    public function deny(){
+         return $this->deny('Computer says no');
     }
 }
