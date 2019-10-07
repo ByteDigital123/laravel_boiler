@@ -14,7 +14,7 @@ class ScaffoldPermission extends Command
      *
      * @var string
      */
-    protected $signature = 'permission:scaffold {model}';
+    protected $signature = 'scaffold:permission {model}';
 
     /**
      * The console command description.

@@ -120,6 +120,10 @@ class ScaffoldSingle extends Command
             'name' => $model . "Factory"
         ]);
 
+        $this->call('scaffold:permission', [
+            'model' => $model
+        ]);
+
         $this->info('Your files are ready');
         $this->warn('Remember to update the AuthServiceProvider with the policies');
     }

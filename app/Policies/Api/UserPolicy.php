@@ -2,7 +2,6 @@
 
 namespace App\Policies;
 
-use App\UserPolicy;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -86,7 +85,8 @@ class UserPolicy
         $this->denyMessage();
     }
 
-    public function denyMessage(){
-         return $this->deny(config('auth.deny_message'));
+    public function denyMessage()
+    {
+        return $this->deny(config('auth.deny_message'));
     }
 }
