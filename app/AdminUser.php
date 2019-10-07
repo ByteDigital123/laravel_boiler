@@ -38,8 +38,9 @@ class AdminUser extends Authenticatable
         'id' => 'integer'
     ];
 
-    protected $with = [
-        'permissions'
+    protected $dates = [
+        'created_at',
+        'updated_at'
     ];
 
     public $searchable = [
@@ -48,13 +49,13 @@ class AdminUser extends Authenticatable
         'email',
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token',
+    ];
+
+    protected $with = [
+        'permissions'
     ];
 
     public function permisions()

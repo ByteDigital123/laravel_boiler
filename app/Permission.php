@@ -6,27 +6,8 @@
 
 namespace App;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Collection;
 
-/**
- * Class Permission
- *
- * @property int $id
- * @property string $name
- * @property string $label
- * @property string $guard_name
- * @property int $permission_group_id
- * @property Carbon $created_at
- * @property Carbon $updated_at
- *
- * @property PermissionGroup $permission_group
- * @property Collection|ModelHasPermission[] $model_has_permissions
- * @property Collection|Role[] $roles
- *
- * @package App
- */
 class Permission extends Model
 {
     protected $table = 'permissions';
@@ -41,6 +22,11 @@ class Permission extends Model
         'model',
         'guard_name',
         'permission_group_id'
+    ];
+
+    protected $dates = [
+        'created_at',
+        'updated_at'
     ];
 
     public function permission_group()

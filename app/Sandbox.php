@@ -22,6 +22,11 @@ class Sandbox extends Model
         'name'
     ];
 
+    protected $dates = [
+        'created_at',
+        'updated_at'
+    ];
+
     protected $with = [
       'adminUser'
     ];
