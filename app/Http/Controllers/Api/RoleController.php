@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use App\Repositories\Role\RoleInterface;
-use App\Http\Resources\Role\RoleResource;
+use App\Http\Resources\Api\Role\RoleResource;
 use App\Http\Requests\Api\Role\StoreRoleRequest;
 use App\Http\Requests\Api\Role\UpdateRoleRequest;
 

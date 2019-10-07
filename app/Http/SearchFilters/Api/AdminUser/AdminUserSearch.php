@@ -1,6 +1,6 @@
 <?php
 
-namespace App\SearchFilters\AdminUser;
+namespace App\SearchFilters\Api\AdminUser;
 
 use App\AdminUser;
 use App\SearchFilters\ApiSearchableTrait;

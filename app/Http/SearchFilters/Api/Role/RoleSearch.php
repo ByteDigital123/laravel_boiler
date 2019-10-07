@@ -1,13 +1,13 @@
 <?php
 
-namespace App\SearchFilters\Api\Sandbox;
+namespace App\Http\SearchFilters\Api\Role;
 
-use App\Sandbox;
+use App\Role;
 use App\SearchFilters\ApiSearchableTrait;
 
-class SandboxSearch
+class RoleSearch
 {
-    protected static $model = Sandbox::class;
+    protected static $model = Role::class;
     protected static $namespace = __NAMESPACE__;
 
     use ApiSearchableTrait;

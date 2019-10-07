@@ -129,6 +129,6 @@ class ScaffoldSingle extends Command
         ]);
 
         $this->info('Your files are ready');
-        $this->warning('Remember to update the AuthServiceProvider with the policies');
+        $this->warn('Remember to update the AuthServiceProvider with the policies');
     }
 }
