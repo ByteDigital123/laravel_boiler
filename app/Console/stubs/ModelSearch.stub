@@ -5,7 +5,7 @@ namespace DummyNamespace;
 use App\DummyClass;
 use App\SearchFilters\ApiSearchableTrait;
 
-class DummyClassSearch
+class DummyClass
 {
     protected static $model = DummyClass::class;
     protected static $namespace = __NAMESPACE__;
