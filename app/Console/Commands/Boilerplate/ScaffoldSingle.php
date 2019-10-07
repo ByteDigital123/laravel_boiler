@@ -107,7 +107,6 @@ class ScaffoldSingle extends Command
             '--location' => $location
         ]);
 
-
         $this->info('Creating Policy');
         \Artisan::call('scaffold:policy', [
             'name' => $model . "Policy",
@@ -120,6 +119,7 @@ class ScaffoldSingle extends Command
             'name' => $model . "Factory"
         ]);
 
+        $this->info('Creating Lagacy Permissions');
         $this->call('scaffold:permission', [
             'model' => $model
         ]);
