@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Policies;
+namespace App\Policies\Api;
 
 use App\AdminUser;
 use Illuminate\Support\Facades\Auth;
@@ -25,6 +25,7 @@ class AdminUserPolicy
         if (Auth::user()->can(__FUNCTION__ . '_' . $this->className)) {
             return true;
         }
+        $this->denyMessage();
     }
 
     /**
@@ -39,6 +40,7 @@ class AdminUserPolicy
         if (Auth::user()->can(__FUNCTION__ . '_' . $this->className)) {
             return true;
         }
+        $this->denyMessage();
     }
 
     /**
@@ -52,6 +54,7 @@ class AdminUserPolicy
         if (Auth::user()->can(__FUNCTION__ . '_' . $this->className)) {
             return true;
         }
+        $this->denyMessage();
     }
 
     /**
@@ -66,6 +69,7 @@ class AdminUserPolicy
         if (Auth::user()->can(__FUNCTION__ . '_' . $this->className)) {
             return true;
         }
+        $this->denyMessage();
     }
 
     /**
@@ -80,5 +84,11 @@ class AdminUserPolicy
         if (Auth::user()->can(__FUNCTION__ . '_' . $this->className)) {
             return true;
         }
+        $this->denyMessage();
+    }
+
+    public function denyMessage()
+    {
+        return $this->deny(config('auth.deny_message'));
     }
 }

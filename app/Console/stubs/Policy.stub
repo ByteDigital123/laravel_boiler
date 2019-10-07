@@ -24,7 +24,7 @@ class DummyClass
         if (Auth::user()->can(__FUNCTION__ . '_' . $this->className)) {
             return true;
         }
-        $this->deny();
+        $this->denyMessage();
     }
 
     /**
@@ -39,7 +39,7 @@ class DummyClass
         if (Auth::user()->can(__FUNCTION__ . '_' . $this->className)) {
             return true;
         }
-        $this->deny();
+        $this->denyMessage();
     }
 
     /**
@@ -53,7 +53,7 @@ class DummyClass
         if (Auth::user()->can(__FUNCTION__ . '_' . $this->className)) {
             return true;
         }
-        $this->deny();
+        $this->denyMessage();
     }
 
     /**
@@ -68,7 +68,7 @@ class DummyClass
         if (Auth::user()->can(__FUNCTION__ . '_' . $this->className)) {
             return true;
         }
-        $this->deny();
+        $this->denyMessage();
     }
 
     /**
@@ -83,10 +83,10 @@ class DummyClass
         if (Auth::user()->can(__FUNCTION__ . '_' . $this->className)) {
             return true;
         }
-        $this->deny();
+        $this->denyMessage();
     }
 
-    public function deny(){
-         return $this->deny('Computer says no');
+    public function denyMessage(){
+         return $this->deny(config('auth.deny_message'));
     }
 }

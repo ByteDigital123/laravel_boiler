@@ -18,6 +18,8 @@ return [
         'passwords' => 'users',
     ],
 
+    'deny_message' => 'Computer says no!',
+
     /*
     |--------------------------------------------------------------------------
     | Authentication Guards
