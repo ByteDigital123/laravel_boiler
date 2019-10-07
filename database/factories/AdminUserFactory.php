@@ -8,11 +8,11 @@ use Faker\Generator as Faker;
 $factory->define(AdminUser::class, function (Faker $faker) {
     return [
         'first_name' => $faker->firstName,
-          'last_name' => $faker->lastName,
-            'email' => $faker->unique()->safeEmail,
-            'password' => bcrypt('abc123'),
-          'api_token' => Str::random(60),
-          'created_at' => \Carbon\Carbon::now(),
-          'updated_at' => \Carbon\Carbon::now()
+        'last_name' => $faker->lastName,
+        'email' => $faker->unique()->safeEmail,
+        'password' => bcrypt('abc123'),
+        'api_token' => Str::random(60),
+        'created_at' => \Carbon\Carbon::now(),
+        'updated_at' => \Carbon\Carbon::now()
     ];
 });

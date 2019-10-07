@@ -11,7 +11,7 @@ class ScaffoldSingle extends Command
      *
      * @var string
      */
-    protected $signature = 'scaffold:single';
+    protected $signature = 'scaffold:single {model} {location}';
 
     /**
      * The console command description.
@@ -37,42 +37,31 @@ class ScaffoldSingle extends Command
      */
     public function handle()
     {
-        $model = $this->ask('Which model are we creating the files for?');
+        //$model = $this->ask('Which model are we creating the files for?');
 
-        $location = $this->choice('Which namespace shall we save them under?', ['Api', 'Web', 'UserDashboard']);
+        //$location = $this->choice('Which namespace shall we save them under?', ['Api', 'Web', 'UserDashboard']);
 
         // 1. create controllers
-        
-        try {
-            $this->info('Creating Controller');
+        $this->info('Creating Controller');
 
-            \Artisan::call('scaffold:controller', [
-                'name' => $model . "Controller",
-                '--model' => $model,
-                '--location' => $location
-            ]);
-        } catch (\Exception $e) {
-            $this->error($e->getMessage());
-        }
+        \Artisan::call('scaffold:controller', [
+            'name' => $model . "Controller",
+            '--model' => $model,
+            '--location' => $location
+        ]);
 
         // 2. create resources
-        
-        try {
-            $this->info('Creating Resources');
+        $this->info('Creating Resources');
 
-            \Artisan::call('make:resource', [
-                'name' => $location . "\\"  . $model . "\\" . $model . "Resource"
-            ]);
+        \Artisan::call('make:resource', [
+            'name' => $location . "\\"  . $model . "\\" . $model . "Resource"
+        ]);
 
-            \Artisan::call('make:resource', [
-                'name' => $location . "\\"  . $model . "\\" . $model . "Collection"
-            ]);
-        } catch (\Exception $e) {
-            $this->error($e->getMessage());
-        }
+        \Artisan::call('make:resource', [
+            'name' => $location . "\\"  . $model . "\\" . $model . "Collection"
+        ]);
 
         // 3. create requests
-        
         try {
             $this->info('Creating Requests');
 
@@ -88,24 +77,19 @@ class ScaffoldSingle extends Command
         }
 
         // 4. create repositories
+        $this->info('Creating Repositories');
         
-        try {
-            $this->info('Creating Repositories');
-            
-            \Artisan::call('scaffold:interface', [
-                'name' => $model . "Interface",
-                '--model' => $model
-            ]);
-        } catch (\Exception $e) {
-            $this->error($e->getMessage());
-        }
+        \Artisan::call('scaffold:interface', [
+            'name' => $model . "Interface",
+            '--model' => $model
+        ]);
 
         // call Create Repository
         \Artisan::call('scaffold:repository', [
             'name' => "\Eloquent" . $model . "Repository",
             '--model' => $model
         ]);
-        
+
         // Call Create ServiceProvider
         \Artisan::call('scaffold:serviceProvider', [
             'name' => $model . "ServiceProvider",
@@ -126,6 +110,11 @@ class ScaffoldSingle extends Command
             'name' => $model . "Policy",
             '--model' => $model,
             '--location' => $location
+        ]);
+
+        $this->info('Making Factory');
+        \Artisan::call('make:factory', [
+            'name' => $model . "Factory"
         ]);
 
         $this->info('Your files are ready');

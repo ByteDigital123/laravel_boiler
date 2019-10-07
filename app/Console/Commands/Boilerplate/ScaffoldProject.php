@@ -57,74 +57,80 @@ class ScaffoldProject extends Command
             $model = basename($file, '.php');
 
             if (! in_array($model, $this->legacyModels)) {
+                $this->info('Setting up files for ' . $model);
 
-                // 1. create controllers
-                $this->info('Creating Controller');
-
-                \Artisan::call('scaffold:controller', [
-                    'name' => $model . "Controller",
-                    '--model' => $model,
-                    '--location' => $location
+                $this->call('scaffold:single', [
+                    'model' => $model,
+                    'location' => $location
                 ]);
+
+                // // 1. create controllers
+                // $this->info('Creating Controller');
+
+                // \Artisan::call('scaffold:controller', [
+                //     'name' => $model . "Controller",
+                //     '--model' => $model,
+                //     '--location' => $location
+                // ]);
          
-                // 2. create resources
+                // // 2. create resources
 
-                $this->info('Creating Resources');
+                // $this->info('Creating Resources');
 
-                \Artisan::call('make:resource', [
-                    'name' => $location . "\\"  . $model . "\\" . $model . "Resource"
-                ]);
+                // \Artisan::call('make:resource', [
+                //     'name' => $location . "\\"  . $model . "\\" . $model . "Resource"
+                // ]);
 
-                \Artisan::call('make:resource', [
-                    'name' => $location . "\\"  . $model . "\\" . $model . "Collection"
-                ]);
+                // \Artisan::call('make:resource', [
+                //     'name' => $location . "\\"  . $model . "\\" . $model . "Collection"
+                // ]);
 
-                // 3. create requests
-                $this->info('Creating Requests');
+                // // 3. create requests
+                // $this->info('Creating Requests');
 
-                \Artisan::call('make:request', [
-                    'name' => $location . "\\"  . $model . "\Store" . $model . "Request"
-                ]);
+                // \Artisan::call('make:request', [
+                //     'name' => $location . "\\"  . $model . "\Store" . $model . "Request"
+                // ]);
 
-                \Artisan::call('make:request', [
-                    'name' => $location . "\\"  . $model . "\Update" . $model . "Request"
-                ]);
+                // \Artisan::call('make:request', [
+                //     'name' => $location . "\\"  . $model . "\Update" . $model . "Request"
+                // ]);
 
-                // 4. create repositories
-                $this->info('Creating Repositories');
+                // // 4. create repositories
+                // $this->info('Creating Repositories');
             
-                \Artisan::call('scaffold:interface', [
-                    'name' => $model . "Interface",
-                    '--model' => $model
-                ]);
+                // \Artisan::call('scaffold:interface', [
+                //     'name' => $model . "Interface",
+                //     '--model' => $model
+                // ]);
 
-                // call Create Repository
-                \Artisan::call('scaffold:repository', [
-                    'name' => "\Eloquent" . $model . "Repository",
-                    '--model' => $model
-                ]);
+                // // call Create Repository
+                // \Artisan::call('scaffold:repository', [
+                //     'name' => "\Eloquent" . $model . "Repository",
+                //     '--model' => $model
+                // ]);
         
-                // Call Create ServiceProvider
-                \Artisan::call('scaffold:serviceProvider', [
-                    'name' => $model . "ServiceProvider",
-                    '--model' => $model
-                ]);
+                // // Call Create ServiceProvider
+                // \Artisan::call('scaffold:serviceProvider', [
+                //     'name' => $model . "ServiceProvider",
+                //     '--model' => $model
+                // ]);
 
-                $this->info('Creating Model Search');
-                // Call Create Search
-                \Artisan::call('scaffold:search', [
-                    'name' => $model . "Search",
-                    '--model' => $model,
-                    '--location' => $location
-                ]);
+                // $this->info('Creating Model Search');
+                // // Call Create Search
+                // \Artisan::call('scaffold:search', [
+                //     'name' => $model . "Search",
+                //     '--model' => $model,
+                //     '--location' => $location
+                // ]);
 
-                // call policy create
-                $this->info('Creating Policy');
-                \Artisan::call('scaffold:policy', [
-                    'name' => $model . "Policy",
-                    '--model' => $model,
-                    '--location' => $location
-                ]);
+                // // call policy create
+                // $this->info('Creating Policy');
+                // \Artisan::call('scaffold:policy', [
+                //     'name' => $model . "Policy",
+                //     '--model' => $model,
+                //     '--location' => $location
+                // ]);
             }
         }
     }
