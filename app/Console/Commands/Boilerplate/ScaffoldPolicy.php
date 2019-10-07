@@ -2,13 +2,14 @@
 
 namespace App\Console\Commands\Boilerplate;
 
-use Illuminate\Console\GeneratorCommand;
 use Illuminate\Support\Str;
 use InvalidArgumentException;
+use Illuminate\Console\GeneratorCommand;
 use Symfony\Component\Console\Input\InputOption;
 
 class ScaffoldPolicy extends GeneratorCommand
 {
+
     /**
      * The name and signature of the console command.
      *
