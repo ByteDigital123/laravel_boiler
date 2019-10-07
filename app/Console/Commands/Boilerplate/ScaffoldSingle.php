@@ -44,6 +44,9 @@ class ScaffoldSingle extends Command
         // 1. create controllers
         $this->info('Creating Controller');
 
+        $model = $this->argument('model');
+        $location = $this->argument('location');
+
         \Artisan::call('scaffold:controller', [
             'name' => $model . "Controller",
             '--model' => $model,
