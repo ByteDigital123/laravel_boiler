@@ -7,22 +7,23 @@ use Illuminate\Support\Str;
 use InvalidArgumentException;
 use Symfony\Component\Console\Input\InputOption;
 
-class ScaffoldController extends GeneratorCommand
+class ScaffoldModelSearch extends GeneratorCommand
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $name = 'scaffold:controller';
+    protected $name = 'scaffold:search';
 
     /**
      * The console command description.
      *
      * @var string
      */
-        
-    protected $type = "Controller";
+    protected $description = 'Create Model search';
+
+    protected $type = "Search";
 
     /**
      * Get the stub file for the generator.
@@ -31,11 +32,7 @@ class ScaffoldController extends GeneratorCommand
      */
     protected function getStub()
     {
-        $locationOption = $this->optio('location');
-        if ($locationOption == 'Api') {
-            return './app/Console/stubs/ApiController.stub';
-        }
-        return './app/Console/stubs/Controller.stub';
+        return './app/Console/stubs/ModelSearch.stub';
     }
 
     /**
@@ -51,7 +48,7 @@ class ScaffoldController extends GeneratorCommand
         ];
     }
 
-    public function getArguments()
+    protected function getArguments()
     {
         return [
             ['name', InputOption::VALUE_REQUIRED, 'Name of the controller'],
@@ -80,7 +77,6 @@ class ScaffoldController extends GeneratorCommand
         );
     }
 
-
     /**
     * Build the replacement values.
     *
@@ -93,13 +89,7 @@ class ScaffoldController extends GeneratorCommand
         $modelClass = $this->parseModel($this->option('model'));
 
         return array_merge($replace, [
-            'DummyFullModelClass' => $modelClass,
-            'DummyModelClass'     => class_basename($modelClass),
-            'DummyInterface'      => class_basename($modelClass) . 'Interface',
-            'DummyTest'          => class_basename($modelClass) . 'Controller',
-            'DummyResource'       => class_basename($modelClass) . 'Resource',
-            'DummyUpdateRequest'  => 'Update' . class_basename($modelClass) . 'Request',
-            'DummyStoreRequest'   => 'Store' . class_basename($modelClass) . 'Request',
+            'DummyClass'     => class_basename($modelClass),
         ]);
     }
 
@@ -134,6 +124,6 @@ class ScaffoldController extends GeneratorCommand
     */
     protected function getDefaultNamespace($rootNamespace)
     {
-        return $rootNamespace . '\Http\Controllers\\' . $this->option('location') ;
+        return $rootNamespace . '\Http\\SearchFilters\\' . $this->option('model');
     }
 }

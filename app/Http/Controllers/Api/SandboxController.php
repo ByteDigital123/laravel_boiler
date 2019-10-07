@@ -6,7 +6,7 @@ use App\Sandbox;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\SandboxResource;
-use App\SearchFilters\Sandbox\SandboxSearch;
+use App\SearchFilters\Api\Sandbox\SandboxSearch;
 use App\Http\Requests\Api\Sandbox\SandboxRequest;
 
 class SandboxController extends Controller

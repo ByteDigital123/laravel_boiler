@@ -23,8 +23,6 @@ class ScaffoldInterface extends GeneratorCommand
      */
     protected $description = 'Create Interface';
 
-
-
     protected $type = "Interface";
 
     /**

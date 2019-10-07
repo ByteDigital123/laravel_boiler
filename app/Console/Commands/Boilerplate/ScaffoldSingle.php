@@ -39,7 +39,7 @@ class ScaffoldSingle extends Command
     {
         $model = $this->ask('Which model are we creating the files for?');
 
-        $location = $this->anticipate('Which namespace shall we save them under?', ['Api']);
+        $location = $this->choice('Which namespace shall we save them under?', ['Api', 'Web', 'UserDashboard']);
 
         // 1. create controllers
         

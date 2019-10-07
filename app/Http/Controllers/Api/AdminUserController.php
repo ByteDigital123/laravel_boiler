@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\AdminUser;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\SearchFilters\AdminUser\AdminUserSearch;
+use App\SearchFilters\Api\AdminUser\AdminUserSearch;
 use App\Repositories\AdminUser\AdminUserInterface;
 use App\Http\Resources\Api\AdminUser\AdminUserResource;
 use App\Http\Requests\Api\AdminUser\StoreAdminUserRequest;

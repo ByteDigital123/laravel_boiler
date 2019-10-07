@@ -6,11 +6,11 @@ use App\AdminUser;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class DummyClass
+class DummyClassPolicy
 {
     use HandlesAuthorization;
     
-    protected $className = DummyClassName;
+    protected $className = 'SnakeClassName';
 
     /**
      * Determine whether the user can view the admin user.
