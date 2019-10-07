@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Resources\Role;
+namespace App\Http\Resources\Api\Sandbox;
 
-use Illuminate\Http\Resources\Json\ResourceCollection;
+use Illuminate\Http\Resources\Json\JsonResource;
 
-class RoleCollection extends ResourceCollection
+class SandboxResource extends JsonResource
 {
     /**
-     * Transform the resource collection into an array.
+     * Transform the resource into an array.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return array

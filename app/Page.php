@@ -8,9 +8,9 @@ class Page extends Model
 {
     protected $fillable = [
       'title', 'slug', 'blocks'
-  ];
+    ];
 
-  protected $casts = [
+    protected $casts = [
         'blocks' => 'array'
     ];
 }

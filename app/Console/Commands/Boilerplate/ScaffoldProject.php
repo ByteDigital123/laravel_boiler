@@ -19,7 +19,7 @@ class ScaffoldProject extends Command
         'FileModel',
         'OauthAccessToken',
         'Page',
-        'Role'
+        'Role',
     ];
 
     /**

@@ -100,6 +100,7 @@ class ScaffoldController extends GeneratorCommand
             'DummyResource'       => class_basename($modelClass) . 'Resource',
             'DummyUpdateRequest'  => 'Update' . class_basename($modelClass) . 'Request',
             'DummyStoreRequest'   => 'Store' . class_basename($modelClass) . 'Request',
+            'Location'            => $this->option('location')
         ]);
     }
 

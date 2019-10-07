@@ -1,22 +1,22 @@
 <?php
 
-namespace App\Policies\Api;
+namespace App\Policies;
 
-use App\AdminUser;
+use App\UserPolicy;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class AdminUserPolicy
+class UserPolicy
 {
     use HandlesAuthorization;
-
-    protected $className = 'admin_user';
+    
+    protected $className = 'user';
 
     /**
      * Determine whether the user can view the admin user.
      *
-     * @param  \App\AdminUser  $user
-     * @param  \App\AdminUser  $adminUser
+     * @param  \App\UserPolicy  $user
+     * @param  \App\UserPolicy  $adminUser
      * @return mixed
      */
     public function list()
@@ -30,8 +30,8 @@ class AdminUserPolicy
     /**
      * Determine whether the user can view the admin user.
      *
-     * @param  \App\AdminUser  $user
-     * @param  \App\AdminUser  $adminUser
+     * @param  \App\UserPolicy  $user
+     * @param  \App\UserPolicy  $adminUser
      * @return mixed
      */
     public function view()
@@ -45,7 +45,7 @@ class AdminUserPolicy
     /**
      * Determine whether the user can create admin users.
      *
-     * @param  \App\AdminUser  $user
+     * @param  \App\UserPolicy  $user
      * @return mixed
      */
     public function create()
@@ -59,8 +59,8 @@ class AdminUserPolicy
     /**
      * Determine whether the user can update the admin user.
      *
-     * @param  \App\AdminUser  $user
-     * @param  \App\AdminUser  $adminUser
+     * @param  \App\UserPolicy  $user
+     * @param  \App\UserPolicy  $adminUser
      * @return mixed
      */
     public function update()
@@ -74,8 +74,8 @@ class AdminUserPolicy
     /**
      * Determine whether the user can delete the admin user.
      *
-     * @param  \App\AdminUser  $user
-     * @param  \App\AdminUser  $adminUser
+     * @param  \App\UserPolicy  $user
+     * @param  \App\UserPolicy  $adminUser
      * @return mixed
      */
     public function delete()
@@ -86,8 +86,7 @@ class AdminUserPolicy
         $this->denyMessage();
     }
 
-    public function denyMessage()
-    {
-        return $this->deny(config('auth.deny_message'));
+    public function denyMessage(){
+         return $this->deny(config('auth.deny_message'));
     }
 }

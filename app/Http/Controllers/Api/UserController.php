@@ -1,23 +1,20 @@
 <?php
 
-namespace DummyNamespace;
+namespace App\Http\Controllers\Api;
 
-use Validator;
-use DummyFullModelClass;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Location\DummyModelClass\DummyResource;
-use App\Repositories\DummyModelClass\DummyInterface;
-use App\Http\Requests\Location\DummyModelClass\DummyUpdateRequest;
-use App\Http\Requests\Location\DummyModelClass\DummyStoreRequest;
-use App\Http\SearchFilters\Location\DummyModelClass\DummyModelClassSearch
+use App\Http\Resources\User\Api\UserResource;
+use App\Repositories\User\UserInterface;
+use App\Http\Requests\Api\User\UpdateUserRequest;
+use App\Http\Requests\Api\User\StoreUserRequest;
 
-class DummyTest extends Controller
+class UserController extends Controller
 {
-    
     protected $model;
 
-    public function __construct(DummyInterface $model){
+    public function __construct(UserInterface $model)
+    {
         $this->model = $model;
     }
 
@@ -28,9 +25,8 @@ class DummyTest extends Controller
      */
     public function index()
     {
-        $this->authorize('list', DummyModelClass::class);
-        return DummyResource::collection(DummyModelClassSearch::apply($request));
-
+        $this->authorize('list', User::class);
+        return UserResource::collection(UserSearch::apply($request));
     }
 
 
@@ -40,9 +36,9 @@ class DummyTest extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(DummyStoreRequest $request)
+    public function store(StoreUserRequest $request)
     {
-        $this->authorize('create', DummyModelClass::class);
+        $this->authorize('create', UserController::class);
 
         $attributes = $request->all();
 
@@ -57,8 +53,8 @@ class DummyTest extends Controller
      */
     public function show($id)
     {
-        $this->authorize('view', DummyModelClass::class);
-        return new DummyResource($this->model->getById($id));
+        $this->authorize('view', UserController::class);
+        return new UserResource($this->model->getById($id));
     }
 
 
@@ -69,9 +65,9 @@ class DummyTest extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($id, DummyUpdateRequest $request)
+    public function update($id, UpdateUserRequest $request)
     {
-        $this->authorize('update', DummyModelClass::class);
+        $this->authorize('update', UserController::class);
 
         $attributes = $request->all();
 
@@ -86,11 +82,10 @@ class DummyTest extends Controller
      */
     public function destroy(Request $request)
     {
-        $this->authorize('delete', DummyModelClass::class);
+        $this->authorize('delete', UserController::class);
         
-        $attributes = $request->json()->all();      
+        $attributes = $request->json()->all();
 
         return $this->model->deleteMultipleById($attributes);
     }
-
 }
