@@ -1,0 +1,16 @@
+name: nucleusbackend
+recipe: laravel
+services:
+  database:
+    portforward: 32874
+config:
+  php: 7.2
+  via: nginx
+  database: mysql
+  webroot: public
+  xdebug: true
+tooling:
+  phpunit:
+    service: appserver
+    description: "Run PHP Unit tests: lando phpunit"
+    cmd: /app/vendor/bin/phpunit
