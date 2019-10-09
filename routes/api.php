@@ -1,17 +1,28 @@
 <?php
 
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
 
+/**
+ * Routes
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * Boilerplate
+ */
 Route::group(['prefix' => 'auth'], function () {
     Route::post('admin-users/login', 'Auth\Admin\LoginController@login');
     Route::post('admin-users/logout', 'Auth\Admin\LoginController@logoutApi');
